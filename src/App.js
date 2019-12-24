@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 
-function App() {
+import Join from "./containers/joinChat";
+import Chat from "./containers/chatRooms";
+import Rooms from "./containers/rooms";
+import NotFound from "./components/notfound/notfound";
+
+const App = ({ onEvent }) => {
+  useEffect(() => {
+    [
+      { event: "connect", handle: "SET_CONNECTED" },
+      { event: "connect_error", handle: "SET_DISCONNECTED" },
+      { event: "old-rooms", handle: "SET_ROOMS" },
+      { event: "old-messages", handle: "SET_MESSAGES" }
+    ].map(event => {
+      onEvent(event);
+      return null;
+    });
+
+    return () => {
+      onEvent({ event: "close_connection", leave: true });
+    };
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Join} />
+        <Route path="/rooms" exact component={Rooms} />
+        <Route path="/:room?" component={Chat} />
+        <Route path="/notfound" component={NotFound} />
+        <Redirect to="notfound" />
+      </Switch>
+    </Router>
   );
-}
+};
 
 export default App;
