@@ -1,0 +1,18 @@
+.input__container {
+  width: 100%;
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin-bottom: 2px;
+}
+
+.input__input {
+  width: calc(100% - 4rem);
+  /* font-size: 1.2rem; */
+  padding: 0.5rem;
+}
+
+.input__button {
+  width: 4rem;
+  padding: 0.5rem;
+  height: 100%;
+}
