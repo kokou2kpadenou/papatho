@@ -6,6 +6,7 @@ const messagesSchema = new Schema({
   text: String,
   dateCreated: { type: Date, default: Date.now },
   sender: String,
+  alertMessage: { type: Boolean, dafault: false },
   room: { type: Schema.Types.ObjectId, ref: "Rooms" }
 });
 
