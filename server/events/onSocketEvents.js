@@ -1,58 +1,52 @@
+const Rooms = require("../models/rooms");
+
+const onMessage = require("./onMessage");
+const onMessageStatusChange = require("./onMessageStatusChange");
+
+const onAddRoom = require("./onAddRoom");
+const onRemoveRoom = require("./onRemoveRoom");
+const onJoinRoom = require("./onJoinRoom");
+const onLeaveRoom = require("./onLeaveRoom");
+
 const onJoinChat = require("./onJoinChat");
+const onLeaveChat = require("./onLeaveChat");
+
+const onDisconnect = require("./onDisconnect");
+
+const onTyping = require("./onTyping");
+const onStopTyping = require("./onStopTyping");
 
 const onSocketEvents = (io, socket) => {
-  // Join chat
-  onJoinChat(socket);
+  Rooms.findCommonRoom()
+    .then(room => {
+      // retrieve common room id from the db
+      const COMMON_ROOM_ID = room[0]._id;
 
-  // When client add a new room
-
-  // When client remove a room
-
-  // When client join a room, we emit to all clients in the room
-
-  // When client unjoin a room, we emit to all clients in the room
-
-  // When a client emits 'typing', we emit to all clients in the room
-  socket.on("typing", ({ username, room }) => {
-    io.to(room).emit("typing", {
-      username: username
+      // Join chat event
+      onJoinChat(socket, COMMON_ROOM_ID);
+      // Leave chat event
+      onLeaveChat(socket);
+      // Add room event
+      onAddRoom(io, socket, COMMON_ROOM_ID);
+      // Remove room event
+      onRemoveRoom(socket, COMMON_ROOM_ID);
+      // Join room event
+      onJoinRoom(io, socket);
+      // Leave room event
+      onLeaveRoom(io, socket);
+      // Typing event
+      onTyping(io, socket);
+      // Stop typing event
+      onStopTyping(io, socket);
+      // Send message event
+      onMessage(socket, COMMON_ROOM_ID);
+      // Message status change event
+      onMessageStatusChange(socket);
+      // Disconnect Event
+      onDisconnect(socket);
+    })
+    .catch(err => {
+      console.log(err);
     });
-  });
-
-  // When a client emits 'stop typing', we emit to all clients in the room
-  socket.on("stop typing", ({ username, room }) => {
-    io.to(room).emit("stop typing", {
-      username: username
-    });
-  });
-
-  // When a client emits 'sendMessage', we emit to all clients in the room
-  socket.on("sendMessage", (message, callback) => {
-    // // const user = getUser(socket.id);
-
-    // io.to(user.room).emit("message", {
-    //   user: user.name,
-    //   text: message
-    // });
-
-    // io.to(user.room).emit("roomData", {
-    //   room: user.room,
-    //   users: getUsersInRoom(user.room)
-    // });
-
-    callback();
-  });
-
-  socket.on("disconnect", () => {
-    console.log("User had left.");
-    // // const user = removeUser(socket.id);
-
-    // if (user) {
-    //   io.to(user.room).emit("message", {
-    //     user: "admin",
-    //     text: `${user.name} has left.`
-    //   });
-    // }
-  });
 };
 module.exports = onSocketEvents;
