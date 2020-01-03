@@ -10,7 +10,10 @@ const PORT = process.env.PORT || 5000;
 const URL = "mongodb://localhost:27017/papatho";
 
 // events
-const events = require("./events/OnSocketEvents");
+const events = require("./events/onSocketEvents");
+
+// Clean up
+const cleanUp = require("./others/cleanUp");
 
 const router = require("./router");
 
@@ -22,8 +25,15 @@ io.on("connection", socket => {
 app.use(router);
 
 mongoose
-  .connect(URL, { useUnifiedTopology: true, useNewUrlParser: true })
+  .connect(URL, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useFindAndModify: false
+  })
   .then(() =>
-    server.listen(PORT, () => console.log(`Server has started on port ${PORT}`))
+    server.listen(PORT, () => {
+      console.log(`Server has started on port ${PORT}`);
+      cleanUp();
+    })
   )
   .catch(error => console.log(error));
