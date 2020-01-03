@@ -1,81 +1,163 @@
-const mongoose = require("mongoose");
-const ObjectId = mongoose.Types.ObjectId;
+const ObjectId = require("mongoose").Types.ObjectId;
+const generateAlertMessage = require("../others/generateAlertMessage");
 
 // import all the model
 const Rooms = require("../models/rooms");
-const Messages = require("../models/messages");
 const Users = require("../models/users");
 
-const onJoinChat = socket => {
-  socket.on("join-chat", userName => {
-    // let existingRooms;
-    // All existing rooms at this moment
-    Rooms.find()
-      .then(rooms => {
-        const roomAlertsID = rooms.filter(room => room.roomName === "Alerts")[0]
-          ._id;
-        // console.log(existingRooms, roomAlertsID);
-        Users.findOne({ user: userName })
-          .populate("messages.message")
-          .then(user => {
-            if (user) {
-              console.log("user exist");
-              console.log(user);
-              // console.log(user.messages);
+const oldMessages = (user, alertMessage) => {
+  const messages = user.messages
+    .filter(({ message }) => message)
+    .map(
+      ({
+        message: { _id, room, text, dateCreated, sender, alertMessage },
+        status
+      }) => ({
+        _id,
+        room,
+        text,
+        dateCreated,
+        sender,
+        alertMessage,
+        status
+      })
+    );
+  return [...messages, alertMessage];
+};
 
-              socket.emit(
-                "old-rooms",
-                rooms.map(({ _id, roomName, roomDesc, roomOwner }) => ({
-                  _id,
-                  roomName,
-                  roomDesc,
-                  roomOwner,
-                  joined: user.rooms.includes(_id)
-                }))
-              );
-              socket.emit(
-                "old-messages",
-                user.messages.map(
-                  ({
-                    message: { _id, room, text, dateCreated, sender },
-                    status
-                  }) => ({
-                    _id,
-                    room,
-                    text,
-                    dateCreated,
-                    sender,
-                    status
-                  })
-                )
-              );
-            } else {
-              console.log("user do not exist");
-              Users.create({
-                _id: new ObjectId(),
-                user: userName,
-                rooms: roomAlertsID._id,
-                messages: []
-              })
-                .then(user => {
-                  console.log(user);
+const onJoinChat = (socket, COMMON_ROOM_ID) => {
+  socket.on("join-chat", userName => {
+    Users.findOne({ user: userName })
+      .populate("messages.message")
+      .then(user => {
+        if (user) {
+          // Update the user
+          Users.findOneAndUpdate(
+            { user: userName },
+            { $addToSet: { socketID: socket.id } }
+          )
+            .then(_user => {
+              Rooms.updateMany(
+                { _id: { $in: user.rooms } },
+                { $addToSet: { onlineUsers: user.user } }
+              )
+                .then(res => {
+                  /** ------------------------------------------------------ */
+                  // Rejoin all existing rooms of the client
+                  user.rooms.forEach(room => {
+                    socket.join(room);
+                  });
+                  // Send room update to connected users of those rooms.
+                  Rooms.find({ _id: { $in: user.rooms } })
+                    .then(userRooms => {
+                      userRooms.forEach(userRoom => {
+                        socket.to(userRoom._id).emit("update-room", userRoom);
+                      });
+                    })
+                    .catch(err => {
+                      console.log(err);
+                    });
+                  // Send all rooms to client
+                  Rooms.find()
+                    .then(rooms => {
+                      socket.emit("rooms", rooms);
+                    })
+                    .catch(err => {
+                      console.log(err);
+                    });
+
+                  /** ---------------------------------------------------- */
                 })
                 .catch(err => {
                   console.log(err);
                 });
-            }
+
+              // socket.emit("rooms", rooms);
+
+              socket.emit(
+                "messages",
+                oldMessages(
+                  user,
+                  generateAlertMessage({
+                    room: COMMON_ROOM_ID,
+                    text: "Welcome back to papatho."
+                  })
+                )
+              );
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        } else {
+          // Create new user
+
+          Users.create({
+            _id: new ObjectId(),
+            user: userName,
+            socketID: socket.id,
+            rooms: [COMMON_ROOM_ID],
+            messages: []
           })
-          .catch(err => {
-            console.log(err);
-          });
+            .then(user => {
+              console.log(user);
+              // rejoin all the rooms
+              // socket.join("COMMON");
+              Rooms.updateMany(
+                { _id: { $in: user.rooms } },
+                {
+                  $addToSet: { joinedUsers: user.user, onlineUsers: user.user }
+                }
+              )
+                .then(res => {
+                  /** ------------------------------------------------------ */
+                  // Rejoin all existing rooms of the client
+                  user.rooms.forEach(room => {
+                    socket.join(room);
+                  });
+                  // Send room update to connected users of those rooms.
+                  Rooms.find({ _id: { $in: user.rooms } })
+                    .then(userRooms => {
+                      userRooms.forEach(userRoom => {
+                        socket.to(userRoom._id).emit("update-room", userRoom);
+                      });
+                    })
+                    .catch(err => {
+                      console.log(err);
+                    });
+                  // Send all rooms to client
+                  Rooms.find()
+                    .then(rooms => {
+                      socket.emit("rooms", rooms);
+                    })
+                    .catch(err => {
+                      console.log(err);
+                    });
+
+                  /** ---------------------------------------------------- */
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+
+              socket.emit(
+                "messages",
+                oldMessages(
+                  user,
+                  generateAlertMessage({
+                    room: COMMON_ROOM_ID,
+                    text: "Welcome to papatho."
+                  })
+                )
+              );
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
       })
       .catch(err => {
-        console.log("err");
+        console.log(err);
       });
-
-    socket.join("Alerts");
-
-    // callback();
   });
 };
 
