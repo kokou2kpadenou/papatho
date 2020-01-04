@@ -3,6 +3,7 @@ import { emit } from "../actions";
 import Join from "../components/join/join";
 
 const mapStateToProps = state => ({
+  rooms: state.rooms,
   user: state.user,
   connected: state.connected
 });
