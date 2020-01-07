@@ -1,0 +1,42 @@
+.roomname {
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 3px;
+  flex-shrink: 0;
+  text-decoration: none;
+  position: relative;
+}
+
+.roomname::after {
+  content: attr(data-short);
+  width: 65%;
+  height: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 2px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 100px 100px, #000, #00f);
+}
+
+.new-message::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ddd;
+  top: 6px;
+  right: 10px;
+  position: absolute;
+  z-index: 2;
+}
+
+.roomname:link,
+.roomname:visited {
+  color: #fff;
+}
