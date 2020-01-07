@@ -1,9 +1,0 @@
-.info__container {
-  display: flex;
-  justify-content: space-between;
-  background-color: blue;
-  padding: 1rem;
-  color: aliceblue;
-  flex-shrink: 0;
-  flex-grow: 0;
-}
