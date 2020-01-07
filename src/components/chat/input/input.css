@@ -9,10 +9,25 @@
   width: calc(100% - 4rem);
   /* font-size: 1.2rem; */
   padding: 0.5rem;
+  border: none;
+  background-color: #666;
+  color: #fff;
+}
+
+.input__input::placeholder {
+  color: #000;
 }
 
 .input__button {
   width: 4rem;
   padding: 0.5rem;
   height: 100%;
+  border: none;
+  background-color: darkblue;
+  color: #fff;
+}
+
+.input__button:disabled {
+  background-color: rgba(0, 0, 139, 0.8);
+  color: #444;
 }
