@@ -1,0 +1,53 @@
+.newroom_form {
+  width: 300px;
+  padding: 2rem 1.5rem;
+  background-color: #000;
+  border-radius: 10px;
+}
+
+.newroom_container {
+  position: fixed;
+  z-index: 2;
+  background-color: rgba(100, 100, 100, 0.6);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newroom__input {
+  width: 100%;
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  padding: 0.3rem;
+  background-color: #666;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  color: #fff;
+  border-radius: 6px;
+  /* box-shadow: 0 3px 6px 0 rgba(255, 255, 255, 0.4),
+    0 1px 3px 0 rgba(255, 255, 255, 0.2); */
+}
+
+.newroom__buttons {
+  text-align: right;
+  padding: 1rem 0 0 0;
+}
+
+.newroom__button {
+  display: inline-block;
+  width: 4rem;
+  padding: 0.2rem;
+  background-color: transparent;
+  border: none;
+  color: #999;
+  cursor: pointer;
+}
+
+.newroom__button:first-of-type {
+  margin-right: 1rem;
+}
