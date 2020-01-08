@@ -4,7 +4,15 @@ import Badge from "../../common/badge/badge";
 import "./lineRoom.css";
 
 export default ({ user, room, emit }) => {
-  const { _id, roomName, roomDesc, roomOwner, joinedUsers, onlineUsers } = room;
+  const {
+    _id,
+    roomName,
+    roomDesc,
+    roomOwner,
+    joinedUsers,
+    onlineUsers,
+    newMessages
+  } = room;
 
   return (
     <div className="lineroom">
@@ -12,6 +20,9 @@ export default ({ user, room, emit }) => {
         roomName={roomName}
         link={joinedUsers.includes(user)}
         rootPath="/rooms/"
+        newMessage={
+          newMessages && (joinedUsers.includes(user) || roomOwner === user)
+        }
         extraClass={
           roomName === "COMMON" ? "roomname--common" : "roomname--joined"
         }
