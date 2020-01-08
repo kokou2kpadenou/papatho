@@ -7,10 +7,13 @@ export default ({
   nav = false,
   link = false,
   newMessage = false,
-  rootPath = "/"
+  rootPath = "/",
+  extraClass = "roomname--base"
 }) => {
   const shortName = roomName.slice(0, 1);
-  const roomNewMessageClass = `roomname ${newMessage ? "new-message" : ""}`;
+  const roomNewMessageClass = `roomname ${extraClass} ${
+    newMessage ? "new-message" : ""
+  }`;
 
   if (!nav) {
     return link ? (
@@ -22,7 +25,7 @@ export default ({
         {roomName}
       </Link>
     ) : (
-      <div className="roomname" data-short={shortName}>
+      <div className="roomname roomname--other" data-short={shortName}>
         {roomName}
       </div>
     );

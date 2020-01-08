@@ -11,6 +11,42 @@
   position: relative;
 }
 
+/* .roomname--base {
+  color: #f00;
+}
+
+.roomname--red {
+  color: #fff;
+}
+
+.roomname--blue {
+  color: #fff;
+}
+
+.roomname--yellow {
+  color: #999;
+} */
+
+.roomname--base:link,
+.roomname--base:visited {
+  color: #f00;
+}
+
+.roomname--coomon:link,
+.roomname--common:visited {
+  color: #eee;
+}
+
+.roomname--joined:link,
+.roomname--joined:visited {
+  color: #eee;
+}
+
+.roomname--other:link,
+.roomname--other:visited {
+  color: #999;
+}
+
 .roomname::after {
   content: attr(data-short);
   width: 65%;
@@ -21,7 +57,22 @@
   position: absolute;
   top: 2px;
   border-radius: 50%;
+}
+
+.roomname--base::after {
+  background: radial-gradient(circle at 100px 100px, #000, #fff);
+}
+
+.roomname--common::after {
+  background: radial-gradient(circle at 100px 100px, #000, #f00);
+}
+
+.roomname--joined::after {
   background: radial-gradient(circle at 100px 100px, #000, #00f);
+}
+
+.roomname--other::after {
+  background: radial-gradient(circle at 100px 100px, #000, yellow);
 }
 
 .new-message::before {
@@ -34,9 +85,4 @@
   right: 10px;
   position: absolute;
   z-index: 2;
-}
-
-.roomname:link,
-.roomname:visited {
-  color: #fff;
 }

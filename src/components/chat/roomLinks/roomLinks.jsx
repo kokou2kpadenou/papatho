@@ -30,6 +30,11 @@ export default ({ show, joinedRooms, showListRooms }) => (
           nav={true}
           rootPath="/rooms/"
           newMessage={joinedRoom.newMessages}
+          extraClass={
+            joinedRoom.roomName === "COMMON"
+              ? "roomname--common"
+              : "roomname--joined"
+          }
         />
       ))}
     </div>

@@ -12,6 +12,9 @@ export default ({ user, room, emit }) => {
         roomName={roomName}
         link={joinedUsers.includes(user)}
         rootPath="/rooms/"
+        extraClass={
+          roomName === "COMMON" ? "roomname--common" : "roomname--joined"
+        }
       />
 
       <div className="lineroom__details">
