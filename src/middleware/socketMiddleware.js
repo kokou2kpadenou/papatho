@@ -1,7 +1,10 @@
 import io from "socket.io-client";
-const ENDPOINT = "localhost:5000";
+
+// SOCKET URL
+const ENDPOINT = process.env.REACT_APP_SERVER_URL;
 
 const socketMiddleware = () => {
+  //
   const socket = io(ENDPOINT);
 
   return ({ dispatch }) => next => action => {
