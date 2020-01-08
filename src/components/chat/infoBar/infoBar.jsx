@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Badge from "../../common/badge/badge";
+import ConfirmationDlg from "../../common/confirmationDlg/confirmationDlg";
 
 import "./infoBar.css";
 
-const InfoBar = ({ user, currentRoom, emit }) => {
+const InfoBar = ({ user, currentRoom, emit, history }) => {
+  const [showDlg, setShowDlg] = useState(false);
+
   const _exit = () => {
     emit({ emit: "leave-chat", payload: "", handle: "RESET_ALL" });
   };
@@ -22,8 +25,7 @@ const InfoBar = ({ user, currentRoom, emit }) => {
         handle: ""
       });
     }
-
-    // TODO:
+    history.replace("/rooms/COMMON");
   };
 
   const _clientsTyping = clientsTypingList => {
@@ -42,6 +44,25 @@ const InfoBar = ({ user, currentRoom, emit }) => {
 
   return (
     <div className="info__container">
+      {showDlg && (
+        <ConfirmationDlg
+          actionFnc={_action}
+          owner={user === currentRoom.roomOwner ? "Delete?" : "Leave?"}
+          cancelFunc={() => setShowDlg(false)}
+        >
+          {user === currentRoom.roomOwner ? (
+            <>
+              <p>The room and it messages will be deleted from all users</p>
+              <p>Are you sure to continue?</p>
+            </>
+          ) : (
+            <>
+              <p>You can not receive messages from the room forward.</p>
+              <p>Are you sure to continue?</p>
+            </>
+          )}
+        </ConfirmationDlg>
+      )}
       <div>
         <h3>
           {currentRoom.roomName}
@@ -49,7 +70,7 @@ const InfoBar = ({ user, currentRoom, emit }) => {
             <button
               style={{ color: "#f00", marginLeft: "5px" }}
               className="info__button"
-              onClick={() => _action(user === currentRoom.roomOwner)}
+              onClick={() => setShowDlg(true)}
             >
               {user === currentRoom.roomOwner ? "Delete" : "Leave"}
             </button>
