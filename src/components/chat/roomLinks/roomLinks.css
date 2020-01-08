@@ -3,10 +3,14 @@
   display: flex;
   overflow-x: auto;
   -ms-overflow-style: none;
+  height: auto;
+  max-height: 10rem;
+  transition: max-height 0.5s;
 }
 
-.nav-rooms__list.show {
-  display: none;
+.nav-rooms__list.no {
+  padding: 0;
+  max-height: 0;
 }
 
 .nav-rooms__show-button {

@@ -19,7 +19,7 @@ export default ({ show, joinedRooms, showListRooms }) => (
         </>
       )}
     </div>
-    <div className={`nav-rooms__list ${show ? "show" : ""}`}>
+    <div className={`nav-rooms__list ${show ? "no" : ""}`}>
       <RoomLink roomName="ROOMS" link={true}>
         ROOMS
       </RoomLink>
