@@ -22,16 +22,29 @@
 
 .rooms__input {
   background-color: #666;
-  border: none;
+  border: 1px solid transparent;
   outline: none;
-  padding: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 1.8rem;
   color: #fff;
-  width: 60%;
   border-radius: 6px;
+  width: 100%;
+}
+
+.rooms__input-container {
+  width: 60%;
+  position: relative;
+}
+
+.rooms__input-icon {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .rooms__input:focus {
-  /*  */
+  background-color: #888;
+  border-color: #ccc;
 }
 
 .room__button {

@@ -15,12 +15,19 @@ export default ({ rooms, user, emit, history }) => {
         <button className="room__button" onClick={() => history.goBack()}>
           &lt; Back
         </button>
-        <input
-          className="rooms__input"
-          value={search}
-          aria-label="search rooms"
-          onChange={e => setSearch(e.target.value)}
-        />
+        <div className="rooms__input-container">
+          <label htmlFor="room-search" className="rooms__input-icon">
+            {" "}
+            &#128269;
+          </label>
+          <input
+            id="room-search"
+            className="rooms__input"
+            value={search}
+            aria-label="search rooms"
+            onChange={e => setSearch(e.target.value)}
+          />
+        </div>
         <button
           className="room__button"
           onClick={() => {
