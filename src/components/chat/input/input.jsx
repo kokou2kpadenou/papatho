@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { autoGenID } from "../../../helper";
 import "./input.css";
 
 const Input = ({ user, emit, roomId }) => {
   const [message, setMessage] = useState("");
-  const ref = useRef(null);
+
   const sendMessage = e => {
     e.preventDefault();
     const payload = {
@@ -20,16 +20,10 @@ const Input = ({ user, emit, roomId }) => {
     }
   };
 
-  useEffect(() => {
-    console.log("focus");
-
-    ref.current.focus();
-  });
-
   return (
     <form className="input__container">
       <input
-        ref={ref}
+        autoFocus
         type="text"
         className="input__input"
         placeholder="Type a message..."
