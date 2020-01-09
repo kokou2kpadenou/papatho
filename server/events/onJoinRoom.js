@@ -63,9 +63,9 @@ const onJoinRoom = (io, socket) => {
             )
               .then(res => {
                 // Send the room new info details to all clients in the room
-                Rooms.find({ _id: ObjectId(room) })
+                Rooms.findOne({ _id: ObjectId(room) })
                   .then(roomInfo => {
-                    io.in(room).emit("update-room", roomInfo);
+                    io.emit("update-room", roomInfo);
                   })
                   .catch(err => {
                     console.log(err);

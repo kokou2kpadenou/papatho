@@ -16,7 +16,7 @@ const onStopTyping = (io, socket) => {
     )
       .then(res => {
         // Send the room new info details to all clients in the room
-        Rooms.find({
+        Rooms.findOne({
           _id: ObjectId(room)
         })
           .then(roomInfo => {
