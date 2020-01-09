@@ -5,7 +5,17 @@ import "./roomLinks.css";
 export default ({ show, joinedRooms, showListRooms }) => (
   <div className="nav-rooms">
     <div className="nav-rooms__show-button" onClick={showListRooms}>
-      {show ? (
+      <span className={`nav-rooms__icon ${show ? "show-left" : "hide-icon"}`}>
+        ↓
+      </span>
+      <span className="nav-rooms__label">{`${
+        show ? "Show Rooms Lists" : "Hide Rooms List"
+      }`}</span>
+      <span className={`nav-rooms__icon ${show ? "show-right" : "hide-icon"}`}>
+        ↓
+      </span>
+
+      {/* {show ? (
         <>
           <span>↑</span>
           <span className="nav-rooms__label">Show Rooms Lists</span>
@@ -17,7 +27,7 @@ export default ({ show, joinedRooms, showListRooms }) => (
           <span className="nav-rooms__label">Hide Rooms List</span>
           <span>↓</span>
         </>
-      )}
+      )} */}
     </div>
     <div className={`nav-rooms__list ${show ? "no" : ""}`}>
       <RoomLink roomName="ROOMS" link={true}>

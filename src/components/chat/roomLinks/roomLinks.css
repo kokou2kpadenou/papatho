@@ -5,7 +5,7 @@
   -ms-overflow-style: none;
   height: auto;
   max-height: 10rem;
-  transition: max-height 0.5s;
+  transition: max-height 0.8s;
 }
 
 .nav-rooms__list.no {
@@ -23,8 +23,22 @@
 .nav-rooms__label {
   display: inline-block;
   width: 14rem;
+  font-size: 0.8rem;
 }
 
 .nav-rooms__list::-webkit-scrollbar {
   display: none;
+}
+
+.nav-rooms__icon {
+  display: inline-block;
+  transition: transform 0.8s;
+}
+
+.nav-rooms__icon.show-left {
+  transform: rotate(180deg);
+}
+
+.nav-rooms__icon.show-right {
+  transform: rotate(-180deg);
 }
