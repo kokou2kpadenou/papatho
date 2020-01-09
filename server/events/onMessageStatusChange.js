@@ -5,15 +5,16 @@ const onMessageStatusChange = socket => {
   socket.on("message-status-change", ({ userName, room, status }) => {
     Messages.find({ room: room })
       .then(messages => {
-        userRoomMessages = messages.map(({ _id }) => _id);
-        Users.updateMany(
-          {
-            user: userName,
-            messages: { message: { $in: userRoomMessages } }
-          },
-          { messages: { status: status } }
-        ).catch(err => {
-          console.log(err);
+        messages.forEach(({ _id }) => {
+          Users.updateOne(
+            {
+              user: userName,
+              messages: { $elemMatch: { message: _id } }
+            },
+            { $set: { "messages.$.status": status } }
+          ).catch(err => {
+            console.log(err);
+          });
         });
       })
       .catch(err => {
