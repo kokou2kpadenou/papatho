@@ -1,0 +1,29 @@
+.notfound__container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.notfound__title {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.notfound__title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  background-color: #fff;
+  width: 6rem;
+  height: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.notfound__detail {
+  font-size: 1.2rem;
+  color: #f00;
+}

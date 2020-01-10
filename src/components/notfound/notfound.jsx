@@ -3,6 +3,9 @@ import "./notfound.css";
 
 export default () => (
   <div className="notfound__container">
-    <div>Page not found</div>
+    <div>
+      <div className="notfound__title">PAPATHO</div>
+      <div className="notfound__detail">PAGE NOT FOUND</div>
+    </div>
   </div>
 );
