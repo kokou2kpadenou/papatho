@@ -29,16 +29,29 @@ const InfoBar = ({ user, currentRoom, emit, history }) => {
   };
 
   const _clientsTyping = clientsTypingList => {
-    if (clientsTypingList.length === 0) {
+    // retrieve current user from the list before
+    const clientsWithoutCurrentUser = clientsTypingList.filter(
+      client => client !== user
+    );
+
+    const nbrOfClientsTyping = clientsWithoutCurrentUser.length;
+
+    if (nbrOfClientsTyping === 0) {
       return "...";
     }
 
-    if (clientsTypingList > 0 && clientsTypingList < 5) {
-      return `${clientsTypingList.join(",")} are typing.`;
+    if (nbrOfClientsTyping === 1) {
+      return `${clientsWithoutCurrentUser.join(",")} is typing.`;
     }
 
-    if (clientsTypingList >= 5) {
-      return `${clientsTypingList.slice(0, 4).join(",")} and more are typing.`;
+    if (nbrOfClientsTyping > 1 && nbrOfClientsTyping < 5) {
+      return `${clientsWithoutCurrentUser.join(",")} are typing.`;
+    }
+
+    if (nbrOfClientsTyping >= 5) {
+      return `${clientsWithoutCurrentUser
+        .slice(0, 4)
+        .join(",")} and more are typing.`;
     }
   };
 
