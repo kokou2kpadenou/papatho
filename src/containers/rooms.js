@@ -1,16 +1,18 @@
 import { connect } from "react-redux";
-import { addRoom, removeRoom, joinRoom } from "../actions";
-import ManageRooms from "../components/room/manageRooms/manageRooms";
+import { emit, roomHasNewMessage } from "../actions";
+import ManageRooms from "../components/rooms/rooms";
 
 const mapStateToProps = state => ({
-  rooms: state.rooms,
-  user: state.user
+  rooms: state.rooms.map(userRoom => ({
+    ...userRoom,
+    newMessages: roomHasNewMessage(userRoom._id, state.messages.messages)
+  })),
+  user: state.user,
+  connected: state.connected
 });
 
 const mapDispatchToProps = dispatch => ({
-  addRooms: newRoom => dispatch(addRoom(newRoom)),
-  joinRoom: rName => dispatch(joinRoom(rName)),
-  deleteRoom: rName => dispatch(removeRoom(rName))
+  emit: data => dispatch(emit(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageRooms);
