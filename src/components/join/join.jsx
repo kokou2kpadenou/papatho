@@ -1,20 +1,29 @@
 import React, { useState } from "react";
-// import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "./join.css";
 
-const Join = ({ connected, emit, history }) => {
+const Join = ({ rooms, user, connected, emit }) => {
   const [name, setName] = useState("");
-  // const [room, setRoom] = useState("");
 
   const _onClick = e => {
-    if (!name) {
-      e.preventDefault();
-    } else {
+    e.preventDefault();
+    if (name) {
       emit({ emit: "join-chat", payload: name, handle: "UPDATE_USER" });
-      // history.replace({ pathname: "/Alerts" });
-      e.preventDefault();
     }
   };
+
+  const checkRoomsLoaded = () => {
+    if (rooms.length > 0) {
+      if (rooms.filter(room => room.roomName === "COMMON").length > 0) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  if (user && checkRoomsLoaded()) {
+    return <Redirect to="/rooms/COMMON" />;
+  }
 
   return (
     <div className="join__container">
@@ -30,7 +39,6 @@ const Join = ({ connected, emit, history }) => {
             onChange={e => setName(e.target.value)}
           />
         </div>
-        {/* <Link onClick={e => (!name ? e.preventDefault() : null)} to={`/Alerts`}> */}
         <button
           className="join__btn"
           type="submit"
@@ -39,7 +47,6 @@ const Join = ({ connected, emit, history }) => {
         >
           Sign In
         </button>
-        {/* </Link> */}
       </form>
     </div>
   );

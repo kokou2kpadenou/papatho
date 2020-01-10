@@ -3,37 +3,39 @@
   justify-content: center;
   align-items: center;
   max-width: 375px;
-  height: 100vh;
+  height: 100%;
   margin: auto;
   padding: 1rem;
-
-  /* border: 1px solid #000; */
+  color: #fff;
 }
 
 .join__content {
-  /* border: 1px solid #000; */
   width: 100%;
   text-align: center;
   padding: 5rem 2rem;
-  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 14px; */
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25), 0 2px 2px rgba(0, 0, 0, 0.2),
-    0 4px 4px rgba(0, 0, 0, 0.15), 0 8px 8px rgba(0, 0, 0, 0.1),
-    0 16px 16px rgba(0, 0, 0, 0.05);
-  border-radius: 0.5rem;
-  background-color: #fff;
 }
 
 .join__title {
-  padding: 1rem 0;
+  padding: 2rem 0;
 }
 
 .join__btn {
-  margin: 1.5rem 0;
+  margin: 2rem 0;
   padding: 0.3rem 2rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
 }
 
 .join__input {
   font-size: 1.2rem;
-  padding: 0.2rem 1rem;
+  padding: 0.2rem;
   width: 100%;
+  text-align: center;
+  background-color: #aaa;
+  border: none;
+  outline: none;
+  padding: 6px;
+  color: #fff;
+  border-radius: 6px;
 }
