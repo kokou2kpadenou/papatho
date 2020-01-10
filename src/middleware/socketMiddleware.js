@@ -7,9 +7,22 @@ const socketMiddleware = () => {
   //
   const socket = io(ENDPOINT);
 
-  return ({ dispatch }) => next => action => {
+  return ({ getState, dispatch }) => next => action => {
     if (typeof action === "function") {
       return next(action);
+    }
+
+    if (action.type === "ADD_MESSAGE") {
+      if (
+        getState().currentRoom === action.result.room &&
+        action.result.status === "NEW"
+      ) {
+        socket.emit("message-status-change", {
+          userName: action.result.sender,
+          room: action.result.room,
+          status: "VIEW"
+        });
+      }
     }
 
     const { event, leave, handle, emit, payload, ...rest } = action;
