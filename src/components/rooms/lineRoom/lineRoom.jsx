@@ -3,7 +3,7 @@ import RoomLink from "../../common/roomLink/roomLink";
 import Badge from "../../common/badge/badge";
 import "./lineRoom.css";
 
-export default ({ user, room, emit }) => {
+export default ({ connected, user, room, emit }) => {
   const {
     _id,
     roomName,
@@ -35,8 +35,8 @@ export default ({ user, room, emit }) => {
           style={{ display: roomOwner === "admin" ? "none" : "block" }}
         >
           <Badge label="Owner">{roomOwner}</Badge>
-          <Badge label="Joined">{joinedUsers.length}</Badge>
-          <Badge label="Online">{onlineUsers.length}</Badge>
+          {connected && <Badge label="Joined">{joinedUsers.length}</Badge>}
+          {connected && <Badge label="Online">{onlineUsers.length}</Badge>}
         </p>
       </div>
 
@@ -44,6 +44,7 @@ export default ({ user, room, emit }) => {
         {roomOwner !== user && (
           <button
             className="lineroom__button"
+            disabled={!connected}
             style={{
               color: "green",
               display: roomOwner === "admin" ? "none" : "block"
@@ -62,6 +63,7 @@ export default ({ user, room, emit }) => {
         {roomOwner === user && (
           <button
             className="lineroom__button"
+            disabled={!connected}
             style={{ color: "#f00" }}
             onClick={() =>
               emit({ emit: "remove-room", payload: _id, handle: "REMOVE_ROOM" })

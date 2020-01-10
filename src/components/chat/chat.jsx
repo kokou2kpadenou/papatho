@@ -14,6 +14,7 @@ const Chat = ({
   rooms,
   user,
   messages,
+  connected,
   showRooms,
   currentRoom,
   currentRoomId,
@@ -52,6 +53,7 @@ const Chat = ({
           currentRoom={currentRoom}
           emit={emit}
           history={history}
+          connected={connected}
         />
         <Messages messages={messages} user={user} />
         <RoomLinks
@@ -60,7 +62,12 @@ const Chat = ({
           showListRooms={_showListRooms}
         />
         {params.room !== "COMMON" && (
-          <Input user={user} emit={emit} roomId={currentRoom._id} />
+          <Input
+            user={user}
+            emit={emit}
+            roomId={currentRoom._id}
+            connected={connected}
+          />
         )}
       </div>
     </div>

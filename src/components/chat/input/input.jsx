@@ -6,7 +6,7 @@ const TYPING_TIMER_LENGTH = 2000;
 let lastTypingTime;
 let typing = false;
 
-const Input = ({ user, emit, roomId }) => {
+const Input = ({ user, emit, roomId, connected }) => {
   const [message, setMessage] = useState("");
 
   const sendMessage = e => {
@@ -18,7 +18,7 @@ const Input = ({ user, emit, roomId }) => {
       ref: autoGenID(user)
     };
 
-    if (message) {
+    if (message && connected) {
       emit({ emit: "message", payload, handle: "ADD_MESSAGE" });
       setMessage("");
       emit({
@@ -62,7 +62,7 @@ const Input = ({ user, emit, roomId }) => {
         autoFocus
         type="text"
         className="input__input"
-        placeholder="Type a message..."
+        placeholder={connected ? "Type a message..." : "Server no available!!!"}
         aria-label="Type a message..."
         value={message}
         onChange={e => setMessage(e.target.value)}
@@ -70,12 +70,13 @@ const Input = ({ user, emit, roomId }) => {
         onInput={e => {
           updateTyping();
         }}
+        disabled={!connected}
       />
       <button
         className="input__button"
         type="submit"
         onClick={e => sendMessage(e)}
-        disabled={!message}
+        disabled={!connected || !message}
       >
         SEND
       </button>

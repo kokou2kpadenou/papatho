@@ -3,7 +3,7 @@ import LineRoom from "./lineRoom/lineRoom";
 import NewRoom from "./newRoom/newRoom";
 import "./rooms.css";
 
-export default ({ rooms, user, emit, history }) => {
+export default ({ connected, rooms, user, emit, history }) => {
   const [search, setSearch] = useState("");
   const [showNewRoom, setShowNewRoom] = useState(false);
   return (
@@ -17,8 +17,9 @@ export default ({ rooms, user, emit, history }) => {
         </button>
         <div className="rooms__input-container">
           <label htmlFor="room-search" className="rooms__input-icon">
-            {" "}
-            &#128269;
+            <span role="img" aria-label="magnifying glass">
+              &#128269;
+            </span>
           </label>
           <input
             id="room-search"
@@ -30,6 +31,7 @@ export default ({ rooms, user, emit, history }) => {
         </div>
         <button
           className="room__button"
+          disabled={!connected}
           onClick={() => {
             setShowNewRoom(!showNewRoom);
           }}
@@ -43,7 +45,13 @@ export default ({ rooms, user, emit, history }) => {
             room.roomName.toLowerCase().startsWith(search.toLowerCase())
           )
           .map(room => (
-            <LineRoom key={room.roomName} user={user} room={room} emit={emit} />
+            <LineRoom
+              key={room.roomName}
+              connected={connected}
+              user={user}
+              room={room}
+              emit={emit}
+            />
           ))}
       </div>
     </div>

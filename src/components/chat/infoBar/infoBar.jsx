@@ -4,7 +4,7 @@ import ConfirmationDlg from "../../common/confirmationDlg/confirmationDlg";
 
 import "./infoBar.css";
 
-const InfoBar = ({ user, currentRoom, emit, history }) => {
+const InfoBar = ({ user, currentRoom, emit, connected, history }) => {
   const [showDlg, setShowDlg] = useState(false);
 
   const _exit = () => {
@@ -36,7 +36,7 @@ const InfoBar = ({ user, currentRoom, emit, history }) => {
 
     const nbrOfClientsTyping = clientsWithoutCurrentUser.length;
 
-    if (nbrOfClientsTyping === 0) {
+    if (nbrOfClientsTyping === 0 || !connected) {
       return "...";
     }
 
@@ -83,6 +83,7 @@ const InfoBar = ({ user, currentRoom, emit, history }) => {
             <button
               style={{ color: "#f00", marginLeft: "5px" }}
               className="info__button"
+              disabled={!connected}
               onClick={() => setShowDlg(true)}
             >
               {user === currentRoom.roomOwner ? "Delete" : "Leave"}
@@ -93,8 +94,12 @@ const InfoBar = ({ user, currentRoom, emit, history }) => {
           <div className="info__details">
             <div>
               <Badge label="Owner">{currentRoom.roomOwner}</Badge>
-              <Badge label="Joined">{currentRoom.joinedUsers.length}</Badge>
-              <Badge label="Online">{currentRoom.onlineUsers.length}</Badge>
+              {connected && (
+                <Badge label="Joined">{currentRoom.joinedUsers.length}</Badge>
+              )}
+              {connected && (
+                <Badge label="Online">{currentRoom.onlineUsers.length}</Badge>
+              )}
             </div>
             <div>{_clientsTyping(currentRoom.typingUsers)}</div>
           </div>
