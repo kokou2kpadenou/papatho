@@ -1,10 +1,12 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 
-import InfoBar from "../message/infoBar/infoBar";
-import Input from "../message/input/input";
-import Messages from "../message/messages/messages";
+import { useMessageStatusChange } from "./useMessageStatusChange";
 
-import RoomLinks from "../links/roomLinks/roomLinks";
+import InfoBar from "./infoBar/infoBar";
+import Messages from "./messages/messages/messages";
+import RoomLinks from "./roomLinks/roomLinks";
+import Input from "./input/input";
 
 import "./chat.css";
 
@@ -13,24 +15,53 @@ const Chat = ({
   user,
   messages,
   showRooms,
+  currentRoom,
+  currentRoomId,
+  currentRoomHasNewMessages,
+  emit,
   setShowRooms,
-  match: { params }
+  setCurrentRoom,
+  match: { params },
+  history
 }) => {
   const _showListRooms = () => {
     setShowRooms(!showRooms);
   };
+
+  useMessageStatusChange(
+    currentRoomId,
+    emit,
+    user,
+    setCurrentRoom,
+    currentRoomHasNewMessages
+  );
+
+  if (!user) {
+    return <Redirect to="/" />;
+  }
+
+  if (!currentRoom) {
+    return <Redirect to="/rooms/COMMON" />;
+  }
+
   return (
     <div className="chat__container">
       <div className="chat__content">
-        <InfoBar room={params.room} showListRooms={_showListRooms} />
-        <Messages messages={messages} name={user} />
+        <InfoBar
+          user={user}
+          currentRoom={currentRoom}
+          emit={emit}
+          history={history}
+        />
+        <Messages messages={messages} user={user} />
         <RoomLinks
           show={showRooms}
-          joinedRooms={rooms.filter(
-            room => room.joined || room.roomOwner === user
-          )}
+          joinedRooms={rooms}
+          showListRooms={_showListRooms}
         />
-        <Input />
+        {params.room !== "COMMON" && (
+          <Input user={user} emit={emit} roomId={currentRoom._id} />
+        )}
       </div>
     </div>
   );

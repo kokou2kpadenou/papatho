@@ -14,20 +14,6 @@ export default ({ show, joinedRooms, showListRooms }) => (
       <span className={`nav-rooms__icon ${show ? "show-right" : "hide-icon"}`}>
         ↓
       </span>
-
-      {/* {show ? (
-        <>
-          <span>↑</span>
-          <span className="nav-rooms__label">Show Rooms Lists</span>
-          <span>↑</span>
-        </>
-      ) : (
-        <>
-          <span>↓</span>
-          <span className="nav-rooms__label">Hide Rooms List</span>
-          <span>↓</span>
-        </>
-      )} */}
     </div>
     <div className={`nav-rooms__list ${show ? "no" : ""}`}>
       <RoomLink roomName="ROOMS" link={true}>
