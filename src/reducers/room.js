@@ -2,23 +2,24 @@ const rooms_initial = [];
 
 export const rooms = (state = rooms_initial, action) => {
   switch (action.type) {
-    case "SET_ROOMS":
-      return action.result;
-
-    case "RESET_ROOM":
+    case "RESET_ALL":
       return [];
 
+    case "RESET_ROOMS":
+      return [];
+
+    case "ADD_ROOMS":
+      return action.result;
+
     case "ADD_ROOM":
-      return [...state, action.room];
+      return [...state, { ...action.result }];
 
-    case "DELETE_ROOM":
-      return state.filter(room => room.roomName !== action.roomName);
+    case "REMOVE_ROOM":
+      return state.filter(room => room._id !== action.result);
 
-    case "JOIN_ROOM":
+    case "UPDATE_ROOM":
       return state.map(room =>
-        room.roomName === action.roomName
-          ? { ...room, joined: !room.joined }
-          : room
+        room._id === action.result._id ? action.result : room
       );
 
     default:
