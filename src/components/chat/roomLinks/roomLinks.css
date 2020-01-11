@@ -16,7 +16,7 @@
 .nav-rooms__show-button {
   padding: 5px 0;
   text-align: center;
-  color: #f00;
+  color: var(--main-other-color);
   cursor: pointer;
 }
 

@@ -14,26 +14,12 @@
 .dlg__form {
   max-width: 450px;
   padding: 1rem 1.5rem;
-  background-color: #000;
+  background-color: var(--main-bg-color);
   border-radius: 10px;
 }
 
 .dlg__buttons {
   text-align: right;
-}
-
-.dlg__button {
-  display: inline-block;
-  width: 4rem;
-  padding: 0.2rem;
-  background-color: transparent;
-  border: none;
-  color: #999;
-  cursor: pointer;
-}
-
-.dlg__button:first-of-type {
-  margin-right: 1rem;
 }
 
 .dlg__msg {
@@ -43,5 +29,5 @@
 
 .dlg__icon {
   font-size: 2rem;
-  color: #f00;
+  color: var(--btn-danger-color);
 }

@@ -30,10 +30,11 @@ const Join = ({ rooms, user, connected, emit }) => {
       <form className="join__content">
         <div>
           {!connected && <p style={{ color: "red" }}>Network Issue</p>}
-          <h1 className="join__title">Join</h1>
+          <h1 className="join__title">PAPATHO</h1>
           <input
+            autoFocus
             className="join__input"
-            placeholder="Name"
+            placeholder="Username"
             aria-label="Name"
             type="text"
             onChange={e => setName(e.target.value)}
@@ -45,7 +46,7 @@ const Join = ({ rooms, user, connected, emit }) => {
           disabled={!name || !connected}
           onClick={e => _onClick(e)}
         >
-          Sign In
+          Join
         </button>
       </form>
     </div>

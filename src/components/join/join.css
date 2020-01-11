@@ -6,7 +6,6 @@
   height: 100%;
   margin: auto;
   padding: 1rem;
-  color: #fff;
 }
 
 .join__content {
@@ -16,15 +15,18 @@
 }
 
 .join__title {
-  padding: 2rem 0;
+  font-size: 3.5rem;
+  margin: 2rem 0;
+  position: relative;
 }
 
 .join__btn {
   margin: 2rem 0;
   padding: 0.3rem 2rem;
-  border: none;
   cursor: pointer;
-  border-radius: 3px;
+  border: 1px solid transparent;
+  color: var(--main-other-color);
+  outline: none;
 }
 
 .join__input {
@@ -32,10 +34,31 @@
   padding: 0.2rem;
   width: 100%;
   text-align: center;
-  background-color: #aaa;
-  border: none;
+  background-color: var(--main-darker-color);
+  color: var(--main-bright-color);
   outline: none;
   padding: 6px;
-  color: #fff;
-  border-radius: 6px;
+  border: 1px solid transparent;
+}
+
+.join__input::placeholder {
+  color: var(--main-bg-color);
+}
+
+.join__input:focus {
+  border-color: var(--main-dark-color);
+}
+.join__btn:focus {
+  border-color: var(--main-other-color);
+}
+
+.join__title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  background-color: var(--main-text-color);
+  width: 6rem;
+  height: 2px;
+  left: 50%;
+  transform: translateX(-50%);
 }

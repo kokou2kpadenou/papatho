@@ -7,27 +7,33 @@
 
 .input__input {
   width: calc(100% - 4rem);
-  /* font-size: 1.2rem; */
   padding: 0.5rem;
-  border: none;
-  background-color: #666;
-  color: #fff;
+  background-color: var(--main-darker-color);
+  color: var(--main-bright-color);
+  outline: none;
+  border: 1px solid transparent;
 }
 
 .input__input::placeholder {
-  color: #000;
+  color: var(--main-bg-color);
+}
+
+.input__input:focus,
+.input__button:focus {
+  border-color: var(--main-dark-color);
 }
 
 .input__button {
   width: 4rem;
   padding: 0.5rem;
   height: 100%;
-  border: none;
-  background-color: darkblue;
-  color: #fff;
+  outline: none;
+  border: 1px solid var(--btn-extra-color);
+  background-color: var(--btn-extra-color);
+  color: var(--main-bright-color);
 }
 
 .input__button:disabled {
-  background-color: rgba(0, 0, 139, 0.8);
-  color: #444;
+  opacity: 0.8;
+  color: var(--main-darker-color);
 }

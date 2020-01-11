@@ -5,46 +5,35 @@
   align-items: flex-end;
   width: 3.8rem;
   height: 3.8rem;
-  border-radius: 3px;
   flex-shrink: 0;
   text-decoration: none;
   position: relative;
+  outline: none;
+  border: 1px solid transparent;
 }
 
-/* .roomname--base {
-  color: #f00;
+.roomname:focus {
+  border-color: var(--main-dark-color);
 }
-
-.roomname--red {
-  color: #fff;
-}
-
-.roomname--blue {
-  color: #fff;
-}
-
-.roomname--yellow {
-  color: #999;
-} */
 
 .roomname--base:link,
 .roomname--base:visited {
-  color: #f00;
+  color: var(--main-other-color);
 }
 
-.roomname--coomon:link,
+.roomname--common:link,
 .roomname--common:visited {
-  color: #eee;
+  color: var(--main-bright-color);
 }
 
 .roomname--joined:link,
 .roomname--joined:visited {
-  color: #eee;
+  color: var(--main-bright-color);
 }
 
 .roomname--other:link,
 .roomname--other:visited {
-  color: #999;
+  color: var(--main-dark-color);
 }
 
 .roomname::after {
@@ -60,19 +49,35 @@
 }
 
 .roomname--base::after {
-  background: radial-gradient(circle at 100px 100px, #000, #fff);
+  background: radial-gradient(
+    circle at 100px 100px,
+    var(--main-bg-color),
+    var(--rooms-bg-color)
+  );
 }
 
 .roomname--common::after {
-  background: radial-gradient(circle at 100px 100px, #000, #f00);
+  background: radial-gradient(
+    circle at 100px 100px,
+    var(--main-bg-color),
+    var(--common-bg-color)
+  );
 }
 
 .roomname--joined::after {
-  background: radial-gradient(circle at 100px 100px, #000, #00f);
+  background: radial-gradient(
+    circle at 100px 100px,
+    var(--main-bg-color),
+    var(--joined-bg-color)
+  );
 }
 
 .roomname--other::after {
-  background: radial-gradient(circle at 100px 100px, #000, yellow);
+  background: radial-gradient(
+    circle at 100px 100px,
+    var(--main-bg-color),
+    var(--others-bg-color)
+  );
 }
 
 .new-message::before {
@@ -80,7 +85,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #ddd;
+  background-color: var(--main-text-color);
   top: 6px;
   right: 10px;
   position: absolute;

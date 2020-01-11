@@ -1,35 +1,30 @@
 import React from "react";
+import Button from "../button/button";
 import "./confirmationDlg.css";
 
-export default ({ children, actionFnc, owner, cancelFunc }) => {
+export default ({ children, actionFn, cancelFn }) => {
   const _action = e => {
     e.preventDefault();
-    actionFnc(owner);
-    cancelFunc();
+    actionFn();
+    cancelFn();
   };
 
   const _cancel = e => {
     if (e.target === e.currentTarget) {
-      cancelFunc();
+      cancelFn();
     }
   };
 
   return (
-    <div className="dlg__container" onClick={_cancel}>
+    <div className="dlg__container" onClick={e => _cancel(e)}>
       <form className="dlg__form">
         <div className="dlg__icon"> &#9888;</div>
         <div className="dlg__msg">{children}</div>
         <div className="dlg__buttons">
-          <button
-            type="submit"
-            className="dlg__button"
-            onClick={e => _action(e)}
-          >
+          <Button type="submit" onClick={e => _action(e)}>
             Yes
-          </button>
-          <button type="reset" className="dlg__button" onClick={cancelFunc}>
-            No
-          </button>
+          </Button>
+          <Button onClick={cancelFn}>No</Button>
         </div>
       </form>
     </div>

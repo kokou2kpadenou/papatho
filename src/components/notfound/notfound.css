@@ -16,7 +16,7 @@
   content: "";
   position: absolute;
   bottom: 0;
-  background-color: #fff;
+  background-color: var(--main-text-color);
   width: 6rem;
   height: 2px;
   left: 50%;
@@ -25,5 +25,5 @@
 
 .notfound__detail {
   font-size: 1.2rem;
-  color: #f00;
+  color: var(--main-other-color);
 }

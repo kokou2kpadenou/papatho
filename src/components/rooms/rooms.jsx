@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LineRoom from "./lineRoom/lineRoom";
 import NewRoom from "./newRoom/newRoom";
+import Button from "../common/button/button";
 import "./rooms.css";
 
 export default ({ connected, rooms, user, emit, history }) => {
@@ -12,9 +13,7 @@ export default ({ connected, rooms, user, emit, history }) => {
         <NewRoom user={user} emit={emit} setShowNewRoom={setShowNewRoom} />
       )}
       <div className="rooms__header">
-        <button className="room__button" onClick={() => history.goBack()}>
-          &lt; Back
-        </button>
+        <Button onClick={() => history.goBack()}>&lt; Back</Button>
         <div className="rooms__input-container">
           <label htmlFor="room-search" className="rooms__input-icon">
             <span role="img" aria-label="magnifying glass">
@@ -29,15 +28,14 @@ export default ({ connected, rooms, user, emit, history }) => {
             onChange={e => setSearch(e.target.value)}
           />
         </div>
-        <button
-          className="room__button"
+        <Button
           disabled={!connected}
           onClick={() => {
             setShowNewRoom(!showNewRoom);
           }}
         >
           + New Room
-        </button>
+        </Button>
       </div>
       <div className="rooms__lists">
         {rooms

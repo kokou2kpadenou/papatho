@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Badge from "../../common/badge/badge";
 import ConfirmationDlg from "../../common/confirmationDlg/confirmationDlg";
+import Button from "../../common/button/button";
 
 import "./infoBar.css";
 
@@ -11,8 +12,8 @@ const InfoBar = ({ user, currentRoom, emit, connected, history }) => {
     emit({ emit: "leave-chat", payload: "", handle: "RESET_ALL" });
   };
 
-  const _action = owner => {
-    if (owner) {
+  const _action = () => {
+    if (user === currentRoom.roomOwner) {
       emit({
         emit: "remove-room",
         payload: currentRoom._id,
@@ -55,39 +56,37 @@ const InfoBar = ({ user, currentRoom, emit, connected, history }) => {
     }
   };
 
+  const dlgMsg =
+    user === currentRoom.roomOwner ? (
+      <>
+        <p>The room and it messages will be deleted from all users.</p>
+        <p>Are you sure to continue?</p>
+      </>
+    ) : (
+      <>
+        <p>You can not receive messages from the room forward.</p>
+        <p>Are you sure to continue?</p>
+      </>
+    );
+
   return (
     <div className="info__container">
       {showDlg && (
-        <ConfirmationDlg
-          actionFnc={_action}
-          owner={user === currentRoom.roomOwner ? "Delete?" : "Leave?"}
-          cancelFunc={() => setShowDlg(false)}
-        >
-          {user === currentRoom.roomOwner ? (
-            <>
-              <p>The room and it messages will be deleted from all users</p>
-              <p>Are you sure to continue?</p>
-            </>
-          ) : (
-            <>
-              <p>You can not receive messages from the room forward.</p>
-              <p>Are you sure to continue?</p>
-            </>
-          )}
+        <ConfirmationDlg actionFn={_action} cancelFn={() => setShowDlg(false)}>
+          {dlgMsg}
         </ConfirmationDlg>
       )}
       <div>
         <h3>
           {currentRoom.roomName}
           {currentRoom.roomName !== "COMMON" && (
-            <button
-              style={{ color: "#f00", marginLeft: "5px" }}
-              className="info__button"
+            <Button
               disabled={!connected}
+              genre={user === currentRoom.roomOwner ? "danger" : "warning"}
               onClick={() => setShowDlg(true)}
             >
               {user === currentRoom.roomOwner ? "Delete" : "Leave"}
-            </button>
+            </Button>
           )}
         </h3>
         {currentRoom.roomName !== "COMMON" && (
@@ -106,9 +105,7 @@ const InfoBar = ({ user, currentRoom, emit, connected, history }) => {
         )}
       </div>
       <div>
-        <button className="info__button" onClick={_exit}>
-          Exit chat
-        </button>
+        <Button onClick={_exit}>Exit Chat</Button>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import Button from "../../common/button/button";
 import "./newRoom.css";
 import { autoGenID } from "../../../helper";
 
@@ -33,8 +34,14 @@ export default ({ user, emit, setShowNewRoom }) => {
     _Clear();
   };
 
+  const _cancel = e => {
+    if (e.target === e.currentTarget) {
+      _Clear();
+    }
+  };
+
   return (
-    <div className="newroom_container">
+    <div className="newroom_container" onClick={e => _cancel(e)}>
       <form className="newroom_form">
         <div>
           <input
@@ -58,17 +65,15 @@ export default ({ user, emit, setShowNewRoom }) => {
           />
         </div>
         <div className="newroom__buttons">
-          <button
+          <Button
             type="submit"
-            className="newroom__button"
             onClick={e => _AddRoom(e)}
             disabled={!roomName || !roomDesc}
           >
             Add
-          </button>
-          <button type="reset" className="newroom__button" onClick={_Clear}>
-            Cancel
-          </button>
+          </Button>
+
+          <Button onClick={_Clear}>Cancel</Button>
         </div>
       </form>
     </div>

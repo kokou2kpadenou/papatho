@@ -6,14 +6,42 @@
   box-sizing: inherit;
 }
 
+:root {
+  --main-bg-color: #000;
+  --main-text-color: #ddd;
+  --main-bright-color: #fff;
+  --main-dark-color: #999;
+  --main-darker-color: #666;
+  --main-other-color: #f00;
+
+  --rooms-bg-color: #fff;
+  --common-bg-color: #f00;
+  --joined-bg-color: blue;
+  --others-bg-color: yellow;
+
+  --btn-normal-color: #fff;
+  --btn-danger-color: #f00;
+  --btn-warning-color: green;
+  --btn-extra-color: darkblue;
+
+  --alert-message-bg-color: #999;
+  --owner-message-bg-color: aqua;
+  --other-message-bg-color: #fff;
+
+  --alert-message-text-color: #fff;
+  --owner-message-text-color: #444;
+  --other-message-text-color: #444;
+}
+
 body,
 html {
   height: 100%;
+  background-color: #000;
+  color: var(--main-text-color);
 }
 
 #root {
   height: 100%;
-  background-color: aqua;
 }
 
 body {

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import RoomLink from "../../common/roomLink/roomLink";
 import Badge from "../../common/badge/badge";
+import Button from "../../common/button/button";
+import ConfirmationDlg from "../../common/confirmationDlg/confirmationDlg";
 import "./lineRoom.css";
 
 export default ({ connected, user, room, emit }) => {
@@ -14,8 +16,44 @@ export default ({ connected, user, room, emit }) => {
     newMessages
   } = room;
 
+  const [showDlg, setShowDlg] = useState(false);
+
+  const _action = () => {
+    if (roomOwner === user) {
+      emit({
+        emit: "remove-room",
+        payload: _id,
+        handle: "REMOVE_ROOM"
+      });
+    } else {
+      emit({
+        emit: joinedUsers.includes(user) ? "leave-room" : "join-room",
+        payload: { userName: user, room: _id },
+        handle: ""
+      });
+    }
+  };
+
+  const dlgMsg =
+    user === roomOwner ? (
+      <>
+        <p>The room and it messages will be deleted from all users.</p>
+        <p>Are you sure to continue?</p>
+      </>
+    ) : (
+      <>
+        <p>You can not receive messages from the room forward.</p>
+        <p>Are you sure to continue?</p>
+      </>
+    );
+
   return (
     <div className="lineroom">
+      {showDlg && (
+        <ConfirmationDlg actionFn={_action} cancelFn={() => setShowDlg(false)}>
+          {dlgMsg}
+        </ConfirmationDlg>
+      )}
       <RoomLink
         roomName={roomName}
         link={joinedUsers.includes(user)}
@@ -41,37 +79,18 @@ export default ({ connected, user, room, emit }) => {
       </div>
 
       <div className="lineroom__buttons">
-        {roomOwner !== user && (
-          <button
-            className="lineroom__button"
-            disabled={!connected}
-            style={{
-              color: "green",
-              display: roomOwner === "admin" ? "none" : "block"
-            }}
-            onClick={() =>
-              emit({
-                emit: joinedUsers.includes(user) ? "leave-room" : "join-room",
-                payload: { userName: user, room: _id },
-                handle: ""
-              })
-            }
-          >
-            {joinedUsers.includes(user) ? "Leave" : "Join"}
-          </button>
-        )}
-        {roomOwner === user && (
-          <button
-            className="lineroom__button"
-            disabled={!connected}
-            style={{ color: "#f00" }}
-            onClick={() =>
-              emit({ emit: "remove-room", payload: _id, handle: "REMOVE_ROOM" })
-            }
-          >
-            Delete
-          </button>
-        )}
+        <Button
+          disabled={!connected}
+          show={roomOwner !== "admin"}
+          genre={roomOwner === user ? "danger" : "warning"}
+          onClick={() => setShowDlg(true)}
+        >
+          {roomOwner === user
+            ? "Delete"
+            : joinedUsers.includes(user)
+            ? "Leave"
+            : "Join"}
+        </Button>
       </div>
     </div>
   );

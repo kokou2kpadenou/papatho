@@ -30,11 +30,11 @@
 }
 
 .message__text--own {
-  background-color: aqua;
+  background-color: var(--owner-message-bg-color);
 }
 
 .message__text--other {
-  background-color: #fff;
+  background-color: var(--other-message-bg-color);
   position: relative;
 }
 
@@ -43,8 +43,8 @@
   position: absolute;
   top: -3px;
   left: 3px;
-  background-color: #f55;
-  color: #fff;
+  background-color: var(--main-other-color);
+  color: var(--main-bright-color);
   font-size: 0.5rem;
   font-weight: bold;
   padding: 1px 2px;
@@ -57,5 +57,5 @@
 }
 
 .message__sender {
-  color: #f55;
+  color: var(--main-other-color);
 }

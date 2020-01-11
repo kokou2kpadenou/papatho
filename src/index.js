@@ -9,6 +9,9 @@ import * as serviceWorker from "./serviceWorker";
 
 const { store, persistor } = configureStore();
 
+// For test purpose
+const unsubscribe = store.subscribe(() => console.log(store.getState()));
+
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
