@@ -1,0 +1,38 @@
+.button {
+  display: inline-block;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.5rem;
+  cursor: pointer;
+  outline: none;
+  min-width: 4rem;
+}
+
+.button.no-show {
+  display: none;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.button::placeholder {
+  color: var(--main-bg-color);
+}
+
+.button:focus {
+  border-color: var(--main-dark-color);
+}
+
+.button.normal {
+  color: var(--btn-normal-color);
+}
+
+.button.danger {
+  color: var(--btn-danger-color);
+}
+
+.button.warning {
+  color: var(--btn-warning-color);
+}
