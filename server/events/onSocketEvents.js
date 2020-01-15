@@ -8,7 +8,10 @@ const onRemoveRoom = require("./onRemoveRoom");
 const onJoinRoom = require("./onJoinRoom");
 const onLeaveRoom = require("./onLeaveRoom");
 
+const onCreateUser = require("./onCreateUser");
+
 const onJoinChat = require("./onJoinChat");
+const onAutoRejoinChat = require("./onAutoRejoinChat");
 const onLeaveChat = require("./onLeaveChat");
 
 const onDisconnect = require("./onDisconnect");
@@ -22,8 +25,12 @@ const onSocketEvents = (io, socket) => {
       // retrieve common room id from the db
       const COMMON_ROOM_ID = room[0]._id;
 
+      // Create new user
+      onCreateUser(socket, COMMON_ROOM_ID);
       // Join chat event
       onJoinChat(socket, COMMON_ROOM_ID);
+      // Auto rejoin chat event
+      onAutoRejoinChat(socket, COMMON_ROOM_ID);
       // Leave chat event
       onLeaveChat(socket);
       // Add room event
