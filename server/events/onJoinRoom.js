@@ -38,7 +38,7 @@ const onJoinRoom = (io, socket) => {
           .then(user => {
             socket.join(room);
 
-            socket.emit("messages", [
+            socket.emit("new-messages", [
               ...messagesToClient,
               generateAlertMessage({
                 room: room,
