@@ -13,6 +13,7 @@
 
 .dlg__form {
   max-width: 450px;
+  min-width: 350px;
   padding: 1rem 1.5rem;
   background-color: var(--main-bg-color);
   border-radius: 10px;
