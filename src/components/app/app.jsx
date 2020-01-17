@@ -17,13 +17,17 @@ const App = ({ onEvent }) => {
       { event: "connect", handle: "SET_CONNECTED" },
       { event: "connect_error", handle: "SET_DISCONNECTED" },
       { event: "messages", handle: "ADD_MESSAGES" },
+      { event: "new-messages", handle: "ADD_NEW_MESSAGES" },
       { event: "message", handle: "ADD_MESSAGE" },
       { event: "update-message", handle: "UPDATE_MESSAGE" },
       { event: "remove-messages", handle: "REMOVE_MESSAGES" },
       { event: "rooms", handle: "ADD_ROOMS" },
       { event: "room", handle: "ADD_ROOM" },
       { event: "update-room", handle: "UPDATE_ROOM" },
-      { event: "remove-room", handle: "REMOVE_ROOM" }
+      { event: "remove-room", handle: "REMOVE_ROOM" },
+      { event: "user-exist", handle: "UPDATE_CURRENT_USER" },
+      { event: "user-not-exist", handle: "UPDATE_NEW_USER" },
+      { event: "user-taken", handle: "CLEAR_USER" }
     ];
 
     events.forEach(event => {
