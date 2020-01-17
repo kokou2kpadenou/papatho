@@ -32,6 +32,7 @@ export default ({ connected, user, room, emit }) => {
         handle: ""
       });
     }
+    setShowDlg(false);
   };
 
   const dlgMsg =

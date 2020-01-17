@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
     ...userRoom,
     newMessages: roomHasNewMessage(userRoom._id, state.messages.messages)
   })),
-  user: state.user,
+  user: state.user.currentUser,
   connected: state.connected
 });
 

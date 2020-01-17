@@ -42,7 +42,7 @@ export default ({ user, emit, setShowNewRoom }) => {
 
   return (
     <div className="newroom_container" onClick={e => _cancel(e)}>
-      <form className="newroom_form">
+      <div className="newroom_form">
         <div>
           <input
             ref={ref}
@@ -51,7 +51,11 @@ export default ({ user, emit, setShowNewRoom }) => {
             aria-label="Room Name"
             type="text"
             value={roomName}
-            onChange={e => setRoomName(e.target.value)}
+            minLength="2"
+            maxLength="6"
+            onChange={e =>
+              setRoomName(e.target.value.replace(/[^\w]/gi, "").toUpperCase())
+            }
           />
         </div>
         <div>
@@ -68,14 +72,14 @@ export default ({ user, emit, setShowNewRoom }) => {
           <Button
             type="submit"
             onClick={e => _AddRoom(e)}
-            disabled={!roomName || !roomDesc}
+            disabled={!roomName || !roomDesc || roomName.length < 2}
           >
             Add
           </Button>
 
           <Button onClick={_Clear}>Cancel</Button>
         </div>
-      </form>
+      </div>
     </div>
   );
 };
