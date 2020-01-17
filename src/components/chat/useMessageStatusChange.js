@@ -14,8 +14,6 @@ export const useMessageStatusChange = (
       setCurrentRoom(currentRoomId);
       if (currentRoomHasNewMessages) {
         timeoutId = setTimeout(() => {
-          console.log("excete");
-
           emit({
             emit: "message-status-change",
             payload: {

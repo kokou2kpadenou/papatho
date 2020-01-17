@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Badge from "../../common/badge/badge";
 import ConfirmationDlg from "../../common/confirmationDlg/confirmationDlg";
 import Button from "../../common/button/button";
+import Icon from "../../common/icon/icon";
 
 import "./infoBar.css";
 
@@ -26,6 +27,7 @@ const InfoBar = ({ user, currentRoom, emit, connected, history }) => {
         handle: ""
       });
     }
+    setShowDlg(false);
     history.replace("/rooms/COMMON");
   };
 
@@ -78,6 +80,9 @@ const InfoBar = ({ user, currentRoom, emit, connected, history }) => {
       )}
       <div>
         <h3>
+          <Icon
+            style={{ margin: "0 1rem 0 0", width: "2rem", height: "2rem" }}
+          />
           {currentRoom.roomName}
           {currentRoom.roomName !== "COMMON" && (
             <Button

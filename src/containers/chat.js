@@ -10,13 +10,13 @@ import Chat from "../components/chat/chat";
 
 const mapStateToProps = (state, ownProps) => ({
   rooms: state.rooms
-    .filter(room => room.joinedUsers.includes(state.user))
+    .filter(room => room.joinedUsers.includes(state.user.currentUser))
     .map(userRoom => ({
       ...userRoom,
       newMessages: roomHasNewMessage(userRoom._id, state.messages.messages)
     })),
 
-  user: state.user,
+  user: state.user.currentUser,
 
   connected: state.connected,
 
