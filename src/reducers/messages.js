@@ -12,11 +12,12 @@ export const messages = (state = initialMessages, action) => {
       return { ...state, messages: [] };
 
     case "ADD_MESSAGES":
-      return { ...state, messages: action.result };
+      return { ...state, messages: [...action.result] };
+
+    case "ADD_NEW_MESSAGES":
+      return { ...state, messages: [...state.messages, ...action.result] };
 
     case "ADD_MESSAGE":
-      console.log(state.currentRoom);
-
       return {
         ...state,
         messages: [
