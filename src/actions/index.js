@@ -6,7 +6,10 @@
 export const roomHasNewMessage = (roomToCheck, messages) => {
   return (
     messages.filter(
-      message => message.room === roomToCheck && message.status === "NEW"
+      message =>
+        message.room === roomToCheck &&
+        message.status === "NEW" &&
+        !message.alertMessage
     ).length > 0
   );
 };
@@ -24,6 +27,14 @@ export const findRoomIdByName = (roomNameToFind, rooms) => {
 
   return "";
 };
+
+/**
+ ** User Actions
+ **/
+
+export const cancelUserCreation = () => ({
+  type: "CLEAR_USER"
+});
 
 /**
  ** Interface Room Visibility Actions
