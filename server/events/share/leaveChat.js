@@ -28,13 +28,13 @@ const leaveChat = (socket, socketID) => {
                   // Send room's updated info to all members except client
                   socket.to(room._id).emit("update-room", room);
                   // Alert message
-                  socket.to(room._id).emit(
-                    "message",
-                    generateAlertMessage({
-                      room: room._id,
-                      text: `${user.user} has left.`
-                    })
-                  );
+                  // socket.to(room._id).emit(
+                  //   "message",
+                  //   generateAlertMessage({
+                  //     room: room._id,
+                  //     text: `${user.user} has left.`
+                  //   })
+                  // );
                   // User leave room
                   socket.leave(room._id);
                 });

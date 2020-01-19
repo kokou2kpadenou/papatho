@@ -42,7 +42,7 @@ const onJoinRoom = (io, socket) => {
               ...messagesToClient,
               generateAlertMessage({
                 room: room,
-                text: `${userName}, you are welcome to this room`
+                text: `${userName}, you are welcome to this room.`
               })
             ]);
 
@@ -51,7 +51,7 @@ const onJoinRoom = (io, socket) => {
               "message",
               generateAlertMessage({
                 room: room,
-                text: `${userName} joined`
+                text: `${userName} joined.`
               })
             );
 

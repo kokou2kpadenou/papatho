@@ -73,8 +73,6 @@ const onJoinChat = (socket, COMMON_ROOM_ID) => {
                   console.log(err);
                 });
 
-              // socket.emit("rooms", rooms);
-
               socket.emit(
                 "messages",
                 oldMessages(

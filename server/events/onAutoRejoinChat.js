@@ -78,7 +78,7 @@ const onAutoRejoinChat = (socket, COMMON_ROOM_ID) => {
                   user,
                   generateAlertMessage({
                     room: COMMON_ROOM_ID,
-                    text: "Welcome back to papatho."
+                    text: "Reconnect to papatho server."
                   })
                 )
               );

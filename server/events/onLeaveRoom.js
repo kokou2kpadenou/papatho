@@ -24,7 +24,7 @@ const onLeaveRoom = (io, socket) => {
               "message",
               generateAlertMessage({
                 room: room,
-                text: `${userName} left`
+                text: `${userName} left the room.`
               })
             );
 

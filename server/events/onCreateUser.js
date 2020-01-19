@@ -86,7 +86,8 @@ const onCreateUser = (socket, COMMON_ROOM_ID) => {
                   user,
                   generateAlertMessage({
                     room: COMMON_ROOM_ID,
-                    text: "Welcome to papatho."
+                    text:
+                      "Welcome to papatho. Click on ROOMS at bottom of your screen, to access all the rooms on papatho. You can join any room in the list by clicking on join of the room."
                   })
                 )
               );

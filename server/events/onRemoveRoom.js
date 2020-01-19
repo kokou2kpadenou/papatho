@@ -21,7 +21,7 @@ const onRemoveRoom = (socket, COMMON_ROOM_ID) => {
           "message",
           generateAlertMessage({
             room: COMMON_ROOM_ID,
-            text: `The room is deleted successfully.`
+            text: `The room ${room} is deleted successfully.`
           })
         );
         socket.broadcast.emit("remove-room", room);
@@ -31,7 +31,7 @@ const onRemoveRoom = (socket, COMMON_ROOM_ID) => {
           "message",
           generateAlertMessage({
             room: room,
-            text: `${room} removed.`
+            text: `Room ${room} is removed.`
           })
         );
 
