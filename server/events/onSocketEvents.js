@@ -1,6 +1,7 @@
 const Rooms = require("../models/rooms");
 
 const onMessage = require("./onMessage");
+const onMessagesStatusChange = require("./onMessagesStatusChange");
 const onMessageStatusChange = require("./onMessageStatusChange");
 
 const onAddRoom = require("./onAddRoom");
@@ -47,6 +48,8 @@ const onSocketEvents = (io, socket) => {
       onStopTyping(io, socket);
       // Send message event
       onMessage(socket, COMMON_ROOM_ID);
+      // Messages status change event
+      onMessagesStatusChange(socket);
       // Message status change event
       onMessageStatusChange(socket);
       // Disconnect Event
