@@ -8,7 +8,7 @@ const cors = require("cors");
 const PORT = process.env.PORT || 5000;
 
 // MongoDB database url
-const URL = "mongodb://localhost:27017/papatho";
+const URL = process.env.DB_URL || "mongodb://localhost:27017/papatho";
 
 // events
 const events = require("./events/onSocketEvents");
@@ -19,11 +19,10 @@ const cleanUp = require("./others/cleanUp");
 const router = require("./router");
 
 io.on("connection", socket => {
-  console.log("We have a new connection.");
   events(io, socket);
 });
 
-app.use(cors);
+app.use(cors());
 app.use(router);
 
 mongoose
