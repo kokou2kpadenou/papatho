@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,10 +6,10 @@ import {
   Redirect
 } from "react-router-dom";
 
-import Join from "../../containers/join";
-import Chat from "../../containers/chat";
-import Rooms from "../../containers/rooms";
-import NotFound from "../notfound/notfound";
+const Join = lazy(() => import("../../containers/join"));
+const Chat = lazy(() => import("../../containers/chat"));
+const Rooms = lazy(() => import("../../containers/rooms"));
+const NotFound = lazy(() => import("../notfound/notfound"));
 
 const App = ({ onEvent }) => {
   useEffect(() => {
@@ -41,13 +41,15 @@ const App = ({ onEvent }) => {
 
   return (
     <Router>
-      <Switch>
-        <Route path="/rooms/:room" component={Chat} />
-        <Route path="/rooms" exact component={Rooms} />
-        <Route path="/not-found" component={NotFound} />
-        <Route path="/" exact component={Join} />
-        <Redirect to="/not-found" />
-      </Switch>
+      <Suspense fallback={<div>Loding...</div>}>
+        <Switch>
+          <Route path="/rooms/:room" component={Chat} />
+          <Route path="/rooms" exact component={Rooms} />
+          <Route path="/not-found" component={NotFound} />
+          <Route path="/" exact component={Join} />
+          <Redirect to="/not-found" />
+        </Switch>
+      </Suspense>
     </Router>
   );
 };
