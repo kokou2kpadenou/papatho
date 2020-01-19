@@ -15,7 +15,7 @@ export const useMessageStatusChange = (
       if (currentRoomHasNewMessages) {
         timeoutId = setTimeout(() => {
           emit({
-            emit: "message-status-change",
+            emit: "messages-status-change",
             payload: {
               userName: user,
               room: currentRoomId,

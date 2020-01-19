@@ -36,8 +36,8 @@ const socketMiddleware = () => {
         action.result.status === "NEW"
       ) {
         socket.emit("message-status-change", {
-          userName: action.result.sender,
-          room: action.result.room,
+          userName: getState().user.currentUser,
+          messageId: action.result._id,
           status: "VIEW"
         });
       }
