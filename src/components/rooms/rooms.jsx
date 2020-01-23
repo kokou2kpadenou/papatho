@@ -30,7 +30,9 @@ export default ({ connected, rooms, user, emit, history }) => {
             className="rooms__input"
             value={search}
             aria-label="search rooms"
-            onChange={e => setSearch(e.target.value)}
+            onChange={e =>
+              setSearch(e.target.value.replace(/[^\w]/gi, "").toUpperCase())
+            }
           />
         </div>
         <Button
@@ -45,7 +47,7 @@ export default ({ connected, rooms, user, emit, history }) => {
       <div className="rooms__lists">
         {rooms
           .filter(room =>
-            room.roomName.toLowerCase().startsWith(search.toLowerCase())
+            room.roomName.toLowerCase().includes(search.toLowerCase())
           )
           .map(room => (
             <LineRoom
