@@ -18,6 +18,9 @@
   text-align: center;
   color: var(--main-other-color);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-rooms__label {
@@ -41,4 +44,9 @@
 
 .nav-rooms__icon.show-right {
   transform: rotate(-180deg);
+}
+
+svg {
+  width: 1rem;
+  fill: currentColor;
 }
