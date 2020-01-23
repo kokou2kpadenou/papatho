@@ -3,7 +3,7 @@ import Button from "../../common/button/button";
 import "./newRoom.css";
 import { autoGenID } from "../../../helper";
 
-export default ({ user, emit, setShowNewRoom }) => {
+export default ({ user, rooms, emit, setShowNewRoom }) => {
   const [roomName, setRoomName] = useState("");
   const [roomDesc, setRoomDesc] = useState("");
 
@@ -40,10 +40,16 @@ export default ({ user, emit, setShowNewRoom }) => {
     }
   };
 
+  const _exist = () => {
+    return rooms.filter(room => room.roomName === roomName).length > 0;
+  };
+
+  console.log(_exist());
+
   return (
     <div className="newroom_container" onClick={e => _cancel(e)}>
       <div className="newroom_form">
-        <div>
+        <div className={_exist() ? "msg-error" : ""}>
           <input
             ref={ref}
             className="newroom__input"
@@ -58,6 +64,7 @@ export default ({ user, emit, setShowNewRoom }) => {
             }
           />
         </div>
+
         <div>
           <input
             className="newroom__input"
@@ -72,7 +79,7 @@ export default ({ user, emit, setShowNewRoom }) => {
           <Button
             type="submit"
             onClick={e => _AddRoom(e)}
-            disabled={!roomName || !roomDesc || roomName.length < 2}
+            disabled={!roomName || !roomDesc || roomName.length < 2 || _exist()}
           >
             Add
           </Button>

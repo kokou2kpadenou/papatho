@@ -41,3 +41,16 @@
 .newroom__input:focus {
   border-color: var(--main-dark-color);
 }
+
+.msg-error {
+  position: relative;
+}
+
+.msg-error::after {
+  content: "This room name is already taken.";
+  position: absolute;
+  font-size: 0.7rem;
+  color: #f00;
+  left: 0;
+  top: 85%;
+}

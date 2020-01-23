@@ -10,7 +10,12 @@ export default ({ connected, rooms, user, emit, history }) => {
   return (
     <div className="rooms__container">
       {showNewRoom && (
-        <NewRoom user={user} emit={emit} setShowNewRoom={setShowNewRoom} />
+        <NewRoom
+          user={user}
+          rooms={rooms}
+          emit={emit}
+          setShowNewRoom={setShowNewRoom}
+        />
       )}
       <div className="rooms__header">
         <Button onClick={() => history.goBack()}>&lt; Back</Button>
