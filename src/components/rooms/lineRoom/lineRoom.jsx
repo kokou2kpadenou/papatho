@@ -35,24 +35,64 @@ export default ({ connected, user, room, emit }) => {
     setShowDlg(false);
   };
 
-  const dlgMsg =
-    user === roomOwner ? (
-      <>
-        <p>The room and it messages will be deleted from all users.</p>
-        <p>Are you sure to continue?</p>
-      </>
-    ) : (
-      <>
-        <p>You can not receive messages from the room forward.</p>
-        <p>Are you sure to continue?</p>
-      </>
-    );
+  const roomOptions = () => {
+    if (user === roomOwner) {
+      return {
+        dlgMsg: (
+          <>
+            <p>
+              The room ({roomName})and its messages will be deleted from all
+              users in the room include yourself.
+            </p>
+            <p>Are you sure to continue?</p>
+          </>
+        ),
+        dlgTitle: "Delete Room",
+        dlgType: "warning",
+        buttonLabel: "Delete"
+      };
+    }
+
+    if (joinedUsers.includes(user)) {
+      return {
+        dlgMsg: (
+          <>
+            <p>
+              By leaving {roomName}, you can no longer receive a message from
+              the room in the future.
+            </p>
+            <p>Are you sure to continue?</p>
+          </>
+        ),
+        dlgTitle: "Leave Room",
+        dlgType: "warning",
+        buttonLabel: "Leave"
+      };
+    }
+
+    return {
+      dlgMsg: (
+        <>
+          <p>You are about to join {roomName}.</p>
+          <p>Are you sure to continue?</p>
+        </>
+      ),
+      dlgTitle: "Join Room",
+      dlgType: "info",
+      buttonLabel: "Join"
+    };
+  };
 
   return (
     <div className="lineroom">
       {showDlg && (
-        <ConfirmationDlg actionFn={_action} cancelFn={() => setShowDlg(false)}>
-          {dlgMsg}
+        <ConfirmationDlg
+          actionFn={_action}
+          cancelFn={() => setShowDlg(false)}
+          dlgType={roomOptions().dlgType}
+          dlgTitle={roomOptions().dlgTitle}
+        >
+          {roomOptions().dlgMsg}
         </ConfirmationDlg>
       )}
       <RoomLink
@@ -86,11 +126,7 @@ export default ({ connected, user, room, emit }) => {
           genre={roomOwner === user ? "danger" : "warning"}
           onClick={() => setShowDlg(true)}
         >
-          {roomOwner === user
-            ? "Delete"
-            : joinedUsers.includes(user)
-            ? "Leave"
-            : "Join"}
+          {roomOptions().buttonLabel}
         </Button>
       </div>
     </div>
