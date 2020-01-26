@@ -62,7 +62,11 @@ const Join = ({
   return (
     <div className="join__container">
       {userRef && newUser && (
-        <ConfirmationDlg actionFn={_action} cancelFn={_cancel}>
+        <ConfirmationDlg
+          actionFn={_action}
+          cancelFn={_cancel}
+          dlgTitle="Create New User"
+        >
           {dlgMsg}
         </ConfirmationDlg>
       )}

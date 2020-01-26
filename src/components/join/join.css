@@ -23,16 +23,17 @@
 
 .join__btn {
   margin: 2rem 0;
-  padding: 0.3rem 2rem;
+  padding: 0.4rem 2.5rem;
   cursor: pointer;
   border: 1px solid transparent;
-  color: var(--main-other-color);
+  color: #fff;
+  background-color: #00008b;
   outline: none;
 }
 
 .join__btn:disabled {
+  cursor: auto;
   opacity: 0.8;
-  color: #f99;
 }
 
 .join__input {
