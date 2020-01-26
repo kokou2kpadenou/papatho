@@ -61,12 +61,18 @@ const InfoBar = ({ user, currentRoom, emit, connected, history }) => {
   const dlgMsg =
     user === currentRoom.roomOwner ? (
       <>
-        <p>The room and it messages will be deleted from all users.</p>
+        <p>
+          The room ({currentRoom.roomName}) and its messages will be deleted
+          from all users in the room include yourself.
+        </p>
         <p>Are you sure to continue?</p>
       </>
     ) : (
       <>
-        <p>You can not receive messages from the room forward.</p>
+        <p>
+          By leaving {currentRoom.roomName}, you can no longer receive a message
+          from the room in the future.
+        </p>
         <p>Are you sure to continue?</p>
       </>
     );
@@ -74,7 +80,14 @@ const InfoBar = ({ user, currentRoom, emit, connected, history }) => {
   return (
     <div className="info__container">
       {showDlg && (
-        <ConfirmationDlg actionFn={_action} cancelFn={() => setShowDlg(false)}>
+        <ConfirmationDlg
+          actionFn={_action}
+          cancelFn={() => setShowDlg(false)}
+          dlgType="warning"
+          dlgTitle={
+            user === currentRoom.roomOwner ? "Delete Room" : "Leave Room"
+          }
+        >
           {dlgMsg}
         </ConfirmationDlg>
       )}
