@@ -1,0 +1,43 @@
+.dlg__container {
+  position: fixed;
+  z-index: 2;
+  background-color: rgba(100, 100, 100, 0.6);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.dlg__form {
+  max-width: 350px;
+  min-width: 280px;
+  padding: 1rem 1.5rem;
+  background-color: var(--main-bg-color);
+  border-radius: 10px;
+}
+
+.dlg__icon {
+  width: 2.5rem;
+  margin-right: 15px;
+}
+
+.dlg__bar {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.dlg__content {
+  margin-top: 1.2rem;
+}
+
+@media only screen and (min-width: 500px) {
+  .dlg__form {
+    max-width: 450px;
+    min-width: 350px;
+  }
+}
