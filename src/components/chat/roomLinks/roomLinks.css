@@ -46,7 +46,8 @@
   transform: rotate(-180deg);
 }
 
-svg {
+.nav-rooms__arrow {
+  color: var(--btn-danger-color);
   width: 1rem;
   fill: currentColor;
 }
