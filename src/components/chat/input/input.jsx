@@ -5,6 +5,7 @@ import "./input.css";
 const TYPING_TIMER_LENGTH = 2000;
 let lastTypingTime;
 let typing = false;
+const isTouchDevice = "ontouchstart" in document.documentElement;
 
 const Input = ({ user, emit, roomId, connected }) => {
   const [message, setMessage] = useState("");
@@ -59,7 +60,7 @@ const Input = ({ user, emit, roomId, connected }) => {
   return (
     <form className="input__container">
       <input
-        autoFocus
+        autoFocus={!isTouchDevice}
         type="text"
         className="input__input"
         placeholder={connected ? "Type a message..." : "Server no available!!!"}
