@@ -5,6 +5,7 @@ import ConfirmationDlg from "../common/confirmationDlg/confirmationDlg";
 import "./join.css";
 
 import { autoGenID } from "../../helper/index";
+const isTouchDevice = "ontouchstart" in document.documentElement;
 
 const Join = ({
   rooms,
@@ -77,7 +78,7 @@ const Join = ({
           <Icon style={{ width: "10rem", height: "10rem" }} />
           <h1 className="join__title">PAPATHO</h1>
           <input
-            autoFocus
+            autoFocus={!isTouchDevice}
             disabled={userRef && newUser}
             className="join__input"
             placeholder="USERNAME"
