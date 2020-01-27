@@ -115,3 +115,32 @@ input[type="text"] {
     --bg-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 448'%3E%3Cdefs/%3E%3Cpath d='M193.255 163.137a58.353 52.078 0 01-58.353 52.079 58.353 52.078 0 01-58.353-52.079 58.353 52.078 0 0158.353-52.078 58.353 52.078 0 0158.353 52.078zM176 96c-78 0-144 44-144 96 0 27.5 18.5 54 50.5 72.5l24.25 14-8.75 21c5.25-3 10.5-6.25 15.5-9.75l11-7.75 13.25 2.5c12.5 2.25 25.25 3.5 38.25 3.5 78 0 144-44 144-96s-66-96-144-96zm205.5 260.25c8.5 20.75 19.5 30.5 29.25 41.5 2.75 3.25 6 6.25 5 11-1 4.5-4.75 7.75-8.75 7.25-7.5-1-14.75-2.25-21.5-4-25.25-6.5-48.75-17.25-69.5-32-14 2.5-28.75 4-44 4-45.25 0-86.75-12.5-118-33 7.25.5 14.75 1 22 1 53.75 0 104.5-15.5 143.25-43.5C361 278 384 236.75 384 192c0-13-2-25.75-5.75-38C420.5 177.25 448 214.25 448 256c0 40.75-26 76.75-66.5 100.25zM176 64c97.25 0 176 57.25 176 128s-78.75 128-176 128c-15.25 0-30-1.5-44-4-20.75 14.75-44.25 25.5-69.5 32-6.75 1.75-14 3-21.5 4h-.75c-3.75 0-7.25-3-8-7.25-1-4.75 2.25-7.75 5-11C47 322.75 58 313 66.5 292.25 26 268.75 0 232.5 0 192 0 121.25 78.75 64 176 64z' fill='%23eee' paint-order='fill markers stroke'/%3E%3C/svg%3E");
   }
 }
+
+/*** iPhone and iOS Form Input Zoom Fixes ***/
+/* Fix Input Zoom on devices older than iPhone 5: */
+@media screen and (device-aspect-ratio: 2/3) {
+  input[type="text"] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 5, 5C, 5S, iPod Touch 5g */
+@media screen and (device-aspect-ratio: 40/71) {
+  input[type="text"] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 6, iPhone 6s, iPhone 7  */
+@media screen and (device-aspect-ratio: 375/667) {
+  input[type="text"] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 6 Plus, iPhone 6s Plus, iPhone 7 Plus, iPhone 8, iPhone X, XS, XS Max  */
+@media screen and (device-aspect-ratio: 9/16) {
+  input[type="text"] {
+    font-size: 16px;
+  }
+}
