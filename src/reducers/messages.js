@@ -20,13 +20,17 @@ export const messages = (state = initialMessages, action) => {
     case "ADD_MESSAGE":
       return {
         ...state,
-        messages: [
-          ...state.messages,
-          state.currentRoom === action.result.room &&
-          action.result.status === "NEW"
-            ? { ...action.result, status: "VIEW" }
-            : action.result
-        ]
+        messages: [...state.messages, action.result]
+      };
+
+    case "MESSAGE_VIEW":
+      return {
+        ...state,
+        messages: state.messages.map(message =>
+          message._id === action.result
+            ? { ...message, status: "VIEW" }
+            : message
+        )
       };
 
     case "UPDATE_MESSAGE":

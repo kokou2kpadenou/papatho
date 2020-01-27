@@ -35,11 +35,14 @@ const socketMiddleware = () => {
         getState().messages.currentRoom === action.result.room &&
         action.result.status === "NEW"
       ) {
-        socket.emit("message-status-change", {
-          userName: getState().user.currentUser,
-          messageId: action.result._id,
-          status: "VIEW"
-        });
+        setTimeout(() => {
+          dispatch({ type: "MESSAGE_VIEW", result: action.result._id });
+          socket.emit("message-status-change", {
+            userName: getState().user.currentUser,
+            messageId: action.result._id,
+            status: "VIEW"
+          });
+        }, 3000);
       }
     }
 
