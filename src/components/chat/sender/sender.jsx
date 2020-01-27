@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { autoGenID } from "../../../helper";
-import "./input.css";
+import "./sender.css";
 
 const TYPING_TIMER_LENGTH = 2000;
 let lastTypingTime;

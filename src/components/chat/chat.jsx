@@ -6,7 +6,7 @@ import { useMessageStatusChange } from "./useMessageStatusChange";
 import InfoBar from "./infoBar/infoBar";
 import Messages from "./messages/messages/messages";
 import RoomLinks from "./roomLinks/roomLinks";
-import Input from "./input/input";
+import Sender from "./sender/sender";
 
 import "./chat.css";
 
@@ -62,7 +62,7 @@ const Chat = ({
           showListRooms={_showListRooms}
         />
         {params.room !== "COMMON" && (
-          <Input
+          <Sender
             user={user}
             emit={emit}
             roomId={currentRoom._id}
