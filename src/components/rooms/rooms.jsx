@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import LineRoom from "./lineRoom/lineRoom";
 import NewRoom from "./newRoom/newRoom";
 import Button from "../common/button/button";
@@ -7,6 +8,11 @@ import "./rooms.css";
 export default ({ connected, rooms, user, emit, history }) => {
   const [search, setSearch] = useState("");
   const [showNewRoom, setShowNewRoom] = useState(false);
+
+  if (!user) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <div className="rooms__container">
       {showNewRoom && (
