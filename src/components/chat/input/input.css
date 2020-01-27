@@ -29,8 +29,8 @@
   height: 100%;
   outline: none;
   border: 1px solid var(--btn-extra-color);
-  background-color: var(--btn-extra-color);
-  color: var(--main-bright-color);
+  color: #fff;
+  background-color: #00008b;
 }
 
 .input__button:disabled {

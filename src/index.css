@@ -8,7 +8,7 @@
 
 :root {
   --main-bg-color: #000;
-  --main-text-color: #ddd;
+  --main-text-color: #eee;
   --main-bright-color: #fff;
   --main-dark-color: #999;
   --main-darker-color: #666;
@@ -17,36 +17,34 @@
   --rooms-bg-color: #fff;
   --common-bg-color: #f00;
   --joined-bg-color: blue;
-  --others-bg-color: yellow;
+  --others-bg-color: #088;
 
   --btn-normal-color: #fff;
   --btn-danger-color: #f00;
   --btn-warning-color: green;
   --btn-extra-color: darkblue;
 
-  --alert-message-bg-color: #999;
-  --owner-message-bg-color: aqua;
+  --alert-message-bg-color: #666;
+  --owner-message-bg-color: #666;
   --other-message-bg-color: #fff;
 
   --alert-message-text-color: #fff;
-  --owner-message-text-color: #444;
-  --other-message-text-color: #444;
+  --owner-message-text-color: #fff;
+  --other-message-text-color: #222;
+
+  --bg-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 448'%3E%3Cdefs/%3E%3Cpath d='M193.255 163.137a58.353 52.078 0 01-58.353 52.079 58.353 52.078 0 01-58.353-52.079 58.353 52.078 0 0158.353-52.078 58.353 52.078 0 0158.353 52.078zM176 96c-78 0-144 44-144 96 0 27.5 18.5 54 50.5 72.5l24.25 14-8.75 21c5.25-3 10.5-6.25 15.5-9.75l11-7.75 13.25 2.5c12.5 2.25 25.25 3.5 38.25 3.5 78 0 144-44 144-96s-66-96-144-96zm205.5 260.25c8.5 20.75 19.5 30.5 29.25 41.5 2.75 3.25 6 6.25 5 11-1 4.5-4.75 7.75-8.75 7.25-7.5-1-14.75-2.25-21.5-4-25.25-6.5-48.75-17.25-69.5-32-14 2.5-28.75 4-44 4-45.25 0-86.75-12.5-118-33 7.25.5 14.75 1 22 1 53.75 0 104.5-15.5 143.25-43.5C361 278 384 236.75 384 192c0-13-2-25.75-5.75-38C420.5 177.25 448 214.25 448 256c0 40.75-26 76.75-66.5 100.25zM176 64c97.25 0 176 57.25 176 128s-78.75 128-176 128c-15.25 0-30-1.5-44-4-20.75 14.75-44.25 25.5-69.5 32-6.75 1.75-14 3-21.5 4h-.75c-3.75 0-7.25-3-8-7.25-1-4.75 2.25-7.75 5-11C47 322.75 58 313 66.5 292.25 26 268.75 0 232.5 0 192 0 121.25 78.75 64 176 64z' fill='%23111' paint-order='fill markers stroke'/%3E%3C/svg%3E");
 }
 
 body,
 html {
   min-height: 25rem;
   height: 100%;
-  background-color: #000;
+  background-color: var(--main-bg-color);
   color: var(--main-text-color);
 }
 
 #root {
   height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 448'%3E%3Cdefs/%3E%3Cpath d='M193.255 163.137a58.353 52.078 0 01-58.353 52.079 58.353 52.078 0 01-58.353-52.079 58.353 52.078 0 0158.353-52.078 58.353 52.078 0 0158.353 52.078zM176 96c-78 0-144 44-144 96 0 27.5 18.5 54 50.5 72.5l24.25 14-8.75 21c5.25-3 10.5-6.25 15.5-9.75l11-7.75 13.25 2.5c12.5 2.25 25.25 3.5 38.25 3.5 78 0 144-44 144-96s-66-96-144-96zm205.5 260.25c8.5 20.75 19.5 30.5 29.25 41.5 2.75 3.25 6 6.25 5 11-1 4.5-4.75 7.75-8.75 7.25-7.5-1-14.75-2.25-21.5-4-25.25-6.5-48.75-17.25-69.5-32-14 2.5-28.75 4-44 4-45.25 0-86.75-12.5-118-33 7.25.5 14.75 1 22 1 53.75 0 104.5-15.5 143.25-43.5C361 278 384 236.75 384 192c0-13-2-25.75-5.75-38C420.5 177.25 448 214.25 448 256c0 40.75-26 76.75-66.5 100.25zM176 64c97.25 0 176 57.25 176 128s-78.75 128-176 128c-15.25 0-30-1.5-44-4-20.75 14.75-44.25 25.5-69.5 32-6.75 1.75-14 3-21.5 4h-.75c-3.75 0-7.25-3-8-7.25-1-4.75 2.25-7.75 5-11C47 322.75 58 313 66.5 292.25 26 268.75 0 232.5 0 192 0 121.25 78.75 64 176 64z' fill='%23111' paint-order='fill markers stroke'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
 }
 
 body {
@@ -56,4 +54,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: var(--bg-img);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
