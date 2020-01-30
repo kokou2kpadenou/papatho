@@ -25,8 +25,16 @@
 .message__text {
   padding: 10px;
   border-radius: 6px;
-  max-width: 15rem;
+  max-width: 12rem;
   min-width: 5rem;
+  position: relative;
+}
+
+.message__text::before {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  border: 6px solid transparent;
 }
 
 .message__text--own {
@@ -34,13 +42,22 @@
   color: var(--owner-message-text-color);
 }
 
+.message__text--own::before {
+  right: -12px;
+  border-left-color: var(--owner-message-bg-color);
+}
+
 .message__text--other {
   background-color: var(--other-message-bg-color);
   color: var(--other-message-text-color);
-  position: relative;
 }
 
-.message__new::before {
+.message__text--other::before {
+  left: -12px;
+  border-right-color: var(--other-message-bg-color);
+}
+
+.message__new::after {
   content: "NEW";
   position: absolute;
   top: -3px;
@@ -60,4 +77,16 @@
 
 .message__sender {
   color: #f00;
+}
+
+@media only screen and (min-width: 375px) {
+  .message__text {
+    max-width: 15rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .message__text {
+    max-width: 17rem;
+  }
 }
