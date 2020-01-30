@@ -5,6 +5,10 @@ const Message = ({
   message: { sender, text, dateCreated, alertMessage, status },
   user
 }) => {
+  const sendindDate = new Date(dateCreated);
+  const formatDate = sendindDate.toDateString().slice(4);
+  const formatTime = sendindDate.toTimeString().slice(0, 8);
+
   if (alertMessage) {
     return (
       <div className="alert-message">
@@ -21,8 +25,8 @@ const Message = ({
         </div>
         {dateCreated && (
           <div className="message__time">
-            <p>{dateCreated.slice(0, 10)}</p>
-            <p>{dateCreated.slice(11, 19)}</p>
+            <p>{formatDate}</p>
+            <p>{formatTime}</p>
           </div>
         )}
       </div>
@@ -33,8 +37,8 @@ const Message = ({
     <div className="message">
       <div className="message__time">
         <p className="message__sender">{sender}</p>
-        <p>{dateCreated.slice(0, 10)}</p>
-        <p>{dateCreated.slice(11, 19)}</p>
+        <p>{formatDate}</p>
+        <p>{formatTime}</p>
       </div>
       <div
         className={`message__text message__text--other ${
