@@ -74,6 +74,11 @@ input[type="text"] {
     --main-darker-color: #666;
     --main-other-color: #f00;
 
+    --rooms-bg-color: #fff;
+    --common-bg-color: #f00;
+    --joined-bg-color: blue;
+    --others-bg-color: #088;
+
     --btn-normal-color: #fff;
 
     --alert-message-bg-color: #666;
@@ -89,8 +94,6 @@ input[type="text"] {
 
 @media (prefers-color-scheme: light) {
   :root {
-    /*  */
-
     --main-bg-color: #fff;
     --main-text-color: #222;
     --main-bright-color: #222;
@@ -107,7 +110,7 @@ input[type="text"] {
 
     --alert-message-bg-color: #666;
     --owner-message-bg-color: tomato;
-    --other-message-bg-color: #0b6623;
+    --other-message-bg-color: hsl(214, 93%, 39%);
 
     --alert-message-text-color: #fff;
     --owner-message-text-color: #fff;
