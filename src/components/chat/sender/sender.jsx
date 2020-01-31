@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Picker } from "emoji-mart";
+import Emoji from "./emoji/emoji";
 import { autoGenID } from "../../../helper";
 import "./sender.css";
-import "emoji-mart/css/emoji-mart.css";
 
 const TYPING_TIMER_LENGTH = 2000;
 let lastTypingTime;
@@ -35,6 +34,10 @@ const Input = ({ user, emit, roomId, connected }) => {
     }
   };
 
+  const addEmoji = emojiToAdd => {
+    setMessage(message + emojiToAdd);
+  };
+
   const updateTyping = () => {
     if (!typing) {
       typing = true;
@@ -63,23 +66,7 @@ const Input = ({ user, emit, roomId, connected }) => {
 
   return (
     <form className="input__container">
-      {(showEmoji || !connected) && (
-        <Picker
-          color="#ff0000"
-          emojiSize={22}
-          emoji=""
-          title="Pick your emoji…"
-          style={{
-            position: "absolute",
-            left: "0px",
-            bottom: "100%",
-            zIndez: "100"
-          }}
-          onSelect={emoji => {
-            setMessage(message + emoji.native);
-          }}
-        />
-      )}
+      {(showEmoji || !connected) && <Emoji addEmoji={addEmoji} />}
       <button
         className="input__button input__button--emoji"
         onClick={e => {
