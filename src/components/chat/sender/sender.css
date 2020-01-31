@@ -3,10 +3,13 @@
   flex-shrink: 0;
   flex-grow: 0;
   margin-bottom: 2px;
+  display: flex;
+  position: relative;
+  z-index: 2;
 }
 
 .input__input {
-  width: calc(100% - 4rem);
+  width: calc(100% - 6rem);
   padding: 0.5rem;
   background-color: var(--main-darker-color);
   color: var(--main-bright-color);
@@ -24,7 +27,6 @@
 }
 
 .input__button {
-  width: 4rem;
   padding: 0.5rem;
   height: 100%;
   outline: none;
@@ -36,4 +38,20 @@
 .input__button:disabled {
   opacity: 0.8;
   color: var(--main-darker-color);
+}
+
+.input__emoji {
+  fill: currentColor;
+  width: 1.8rem;
+}
+
+.input__button--emoji {
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input__button--send {
+  width: 4rem;
 }
