@@ -1,5 +1,4 @@
 import React, { useState, lazy, Suspense } from "react";
-// import Emoji from "./emoji/emoji";
 import { autoGenID } from "../../../helper";
 import "./sender.css";
 
