@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import Emoji from "./emoji/emoji";
+import React, { useState, lazy, Suspense } from "react";
+// import Emoji from "./emoji/emoji";
 import { autoGenID } from "../../../helper";
 import "./sender.css";
+
+const Emoji = lazy(() => import("./emoji/emoji"));
 
 const TYPING_TIMER_LENGTH = 2000;
 let lastTypingTime;
@@ -66,7 +68,25 @@ const Input = ({ user, emit, roomId, connected }) => {
 
   return (
     <form className="input__container">
-      {(showEmoji || !connected) && <Emoji addEmoji={addEmoji} />}
+      {(showEmoji || !connected) && (
+        <Suspense
+          fallback={
+            <div
+              style={{
+                fontSize: "0.6rem",
+                position: "absolute",
+                left: "0px",
+                bottom: "100%",
+                zIndez: "100"
+              }}
+            >
+              Loading...
+            </div>
+          }
+        >
+          <Emoji addEmoji={addEmoji} />
+        </Suspense>
+      )}
       <button
         className="input__button input__button--emoji"
         onClick={e => {
