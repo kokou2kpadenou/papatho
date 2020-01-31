@@ -5,16 +5,23 @@ import "./messages.css";
 
 const Messages = ({ messages, user }) => {
   return (
-    <ScrollToBottom
+    <div
       className="messages__container"
-      scrollViewClassName="messages__content"
+      style={{ height: "calc(100% - 250px)" }}
     >
-      {messages.map((message, i) => (
-        <div key={i}>
-          <Message message={message} user={user} />
-        </div>
-      ))}
-    </ScrollToBottom>
+      <ScrollToBottom
+        className="messages__content"
+        scrollViewClassName="messages__scroll-view"
+        followButtonClassName="messages__followButton"
+        mode="bottom"
+      >
+        {messages.map((message, i) => (
+          <div key={i}>
+            <Message message={message} user={user} />
+          </div>
+        ))}
+      </ScrollToBottom>
+    </div>
   );
 };
 
